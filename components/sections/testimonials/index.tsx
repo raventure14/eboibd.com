@@ -14,12 +14,12 @@ export function TestimonialsSection() {
             className="flex-1"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.2 }}
           >
             <div className="relative w-full max-w-md mx-auto lg:mx-0">
               <div className="absolute inset-0 bg-gradient-to-r from-purple-100 to-blue-100 rounded-full blur-3xl opacity-30" />
               <Image
-                src="/review-illustration.svg"
+                src="/review-illustration.webp"
                 alt="Readers Review"
                 width={300}
                 height={300}
@@ -34,7 +34,7 @@ export function TestimonialsSection() {
             className="flex-1 text-center lg:text-left"
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.2 }}
           >
             <h2 className="text-4xl font-bold mb-6 text-center">
               <span className="text-heading">পাঠকরা</span>{" "}
@@ -53,7 +53,7 @@ export function TestimonialsSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
          
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.2 }}
           className="py-10"
         >
           <TestimonialCarousel />

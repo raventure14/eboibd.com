@@ -15,7 +15,7 @@ export function AudienceSection() {
             y: 0,
             opacity: 1,
           }}
-          transition={{ duration: 0.4, ease: "easeOut" }}
+          transition={{ duration: 0.2, ease: "easeInOut" }}
           className="text-center mb-16"
         >
           <h2 className="text-4xl font-bold">
@@ -23,13 +23,14 @@ export function AudienceSection() {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {AUDIENCES.map((audience) => (
+        <div className="flex justify-center  flex-wrap gap-6 mb-12  place-content-center">
+          {AUDIENCES.map((audience,index) => (
             <AudienceCard
               key={audience.id}
               icon={audience.icon}
               title={audience.title}
               description={audience.description}
+              // className={`${index ===6 && "col-span-1 col-start-2"}`}
             />
           ))}
         </div>
