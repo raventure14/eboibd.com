@@ -33,7 +33,7 @@ const Cart = () => {
           <div className="w-full flex justify-between items-center gap-1 px-2 py-4 border rounded-sm mt-4">
             <div className=" flex justify-center items-center border rounded-sm p-1 shadow-md ">
               <Image
-                src={"/features/book.png"}
+                src={"/features/book.webp"}
                 alt="Know everything about ChatGPT"
                 height={1000}
                 width={1000}
@@ -46,7 +46,7 @@ const Cart = () => {
               </h2>
               <div className="flex justify-start items-center gap-2 px-4">
                 <span className="text-para text-sm font-semibold py-1">
-                  74%+
+                  71%+
                 </span>
               </div>
               <div className="flex justify-between items-center gap-2 px-4 ">

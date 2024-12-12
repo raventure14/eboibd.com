@@ -7,13 +7,13 @@ import CallToAction from "@/components/call-to-action";
 
 export function DoYouKnowSection() {
   return (
-    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-purple-50">
+    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-purple-50 overflow-hidden">
       <div className="container mx-auto">
         <div className="text-center mb-16">
           <motion.h2
             initial={{ scale: 0, opacity: 0.1 }}
             whileInView={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.4, ease: "linear" }}
+            transition={{ duration: 0.1, ease: "linear" }}
             className="text-4xl font-bold mb-6"
           >
             <span className="text-heading">আপনি কি </span>
@@ -25,27 +25,60 @@ export function DoYouKnowSection() {
           {/* AI Impact Section */}
           <motion.div
             initial={{
-              scale: 0,
               opacity: 0.01,
             }}
             whileInView={{
-              scale: 1,
               opacity: 1,
             }}
             transition={{
-              duration: 0.5,
+              duration: 0.3,
               ease: "linear",
             }}
             className="bg-white rounded-2xl p-8 shadow-xl border border-purple-100 flex flex-col justify-between"
           >
-            <div className="">
+            <article className="">
               <div className="flex items-center gap-4 mb-6">
-                <div className="bg-purple-100 p-3 rounded-full">
+                <motion.div
+                  initial={{
+                    x: -50,
+                    opacity: 0.3,
+                  }}
+                  whileInView={{
+                    x: 0,
+                    opacity: 1,
+                  }}
+                  transition={{
+                    duration: 0.2,
+                    ease: "easeInOut",
+                  }}
+                  className="bg-purple-100 p-3 rounded-full"
+                >
                   <Bot className="w-8 h-8 text-purple-600" />
-                </div>
-                <h3 className="text-2xl font-semibold">AI এর প্রভাব</h3>
+                </motion.div>
+                <motion.h3
+                  initial={{ y: -50, opacity: 0.3 }}
+                  whileInView={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.2, ease: "easeInOut" }}
+                  className="text-2xl font-semibold"
+                >
+                  AI এর প্রভাব
+                </motion.h3>
               </div>
-              <p className="text-para leading-relaxed mb-6">
+              <motion.p
+                initial={{
+                  y: 50,
+                  opacity: 0.1,
+                }}
+                whileInView={{
+                  y: 0,
+                  opacity: 1,
+                }}
+                transition={{
+                  duration: 0.3,
+                  ease: "easeInOut",
+                }}
+                className="text-para leading-relaxed mb-6"
+              >
                 কৃত্রিম বুদ্ধিমত্তা (AI) প্রযুক্তির দ্রুত উন্নতি এবং এর ব্যাপক
                 বাস্তবায়ন সাম্প্রতিক বছরগুলোতে চাকরি বাজারে বিপুল পরিবর্তন
                 নিয়ে এসেছে। AI শুধু নতুন কর্মসংস্থান সৃষ্টি করেছে, পাশাপাশি
@@ -60,10 +93,10 @@ export function DoYouKnowSection() {
                 কর্মসংস্থানে টিকে থাকতে পারবে না। AI-কে দক্ষভাবে ব্যবহারের
                 মাধ্যমে একজন ব্যক্তি তার পেশাগত জীবনে অনেক বড় সাফল্য অর্জন করতে
                 পারে।
-              </p>
-            </div>
+              </motion.p>
+            </article>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <article className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <StatCard
                 number="40%"
                 label="চাকরি অটোমেশনের সম্ভাবনা"
@@ -74,51 +107,82 @@ export function DoYouKnowSection() {
                 label="দক্ষতা বৃদ্ধির সুযোগ"
                 className="bg-blue-50"
               />
-            </div>
+            </article>
           </motion.div>
 
           {/* Digital Books Impact Section */}
           <motion.div
             initial={{
-              scale: 0,
               opacity: 0.01,
             }}
             whileInView={{
-              scale: 1,
               opacity: 1,
             }}
             transition={{
-              duration: 0.5,
+              duration: 0.3,
               ease: "linear",
             }}
             className="bg-white rounded-2xl p-8 shadow-xl border border-purple-100 flex flex-col justify-between"
           >
-            <div className="w-full">
+            <article className="w-full">
               <div className="flex items-center gap-4 mb-6">
-                <div className="bg-purple-100 p-3 rounded-full">
+                <motion.div
+                  initial={{
+                    x: -50,
+                    opacity: 0.3,
+                  }}
+                  whileInView={{
+                    x: 0,
+                    opacity: 1,
+                  }}
+                  transition={{
+                    duration: 0.2,
+                    ease: "easeInOut",
+                  }}
+                  className="bg-purple-100 p-3 rounded-full"
+                >
                   <BookText className="w-8 h-8 text-purple-600" />
-                </div>
-                <h3 className="text-2xl font-semibold">
+                </motion.div>
+                <motion.h3
+                  initial={{ y: -50, opacity: 0.3 }}
+                  whileInView={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.2, ease: "easeInOut" }}
+                  className="text-2xl font-semibold"
+                >
                   ডিজিটাল বইয়ের প্রভাব
-                </h3>
+                </motion.h3>
               </div>
-              <p className="text-para leading-relaxed  mb-6">
-              প্রযুক্তিনির্ভর এই যুগের কর্মব্যস্ত জীবনে ডিজিটাল বই এখন অপরিহার্য হয়ে উঠেছে।
-              । ডিজিটাল বই এখন বিশ্বের এক একটি অংশে তথ্য প্রাপ্তি এবং
-                শিক্ষা অর্জনের সবচেয়ে সহজ ও সাশ্রয়ী মাধ্যম হিসেবে পরিচিত। Pew
-                Research Center এর একটি সমীক্ষায় বলা হয়েছে, ২০১৯ সালে
-                আমেরিকায় ৩০% মানুষ নিয়মিত ই-বুক পড়েন, যা পূর্ববর্তী বছরের
-                তুলনায় উল্লেখযোগ্য বৃদ্ধি। ই-বুকের মাধ্যমে পাঠকরা যে কোন সময়,
-                যে কোন স্থানে তাদের প্রয়োজনীয় তথ্য এবং জ্ঞান সংগ্রহ করতে
+              <motion.p
+                initial={{
+                  y: 50,
+                  opacity: 0.1,
+                }}
+                whileInView={{
+                  y: 0,
+                  opacity: 1,
+                }}
+                transition={{
+                  duration: 0.2,
+                  ease: "easeInOut",
+                }}
+                className="text-para leading-relaxed  mb-6"
+              >
+                প্রযুক্তিনির্ভর এই যুগের কর্মব্যস্ত জীবনে ডিজিটাল বই এখন
+                অপরিহার্য হয়ে উঠেছে। । ডিজিটাল বই এখন বিশ্বের এক একটি অংশে তথ্য
+                প্রাপ্তি এবং শিক্ষা অর্জনের সবচেয়ে সহজ ও সাশ্রয়ী মাধ্যম হিসেবে
+                পরিচিত। Pew Research Center এর একটি সমীক্ষায় বলা হয়েছে, ২০১৯
+                সালে আমেরিকায় ৩০% মানুষ নিয়মিত ই-বুক পড়েন, যা পূর্ববর্তী
+                বছরের তুলনায় উল্লেখযোগ্য বৃদ্ধি। ই-বুকের মাধ্যমে পাঠকরা যে কোন
+                সময়, যে কোন স্থানে তাদের প্রয়োজনীয় তথ্য এবং জ্ঞান সংগ্রহ করতে
                 পারেন, যা শুধু শিক্ষার্থীদের জন্য নয়, সাধারণ পাঠকদের জন্যও
                 সুবিধাজনক। ডিজিটাল বইয়ের সুবিধা হলো এটি শুধু স্থান ও সময়ের
                 সীমাবদ্ধতা দূর করে না, বরং পাঠকদের জন্য জ্ঞানের ব্যাপকতা ও
                 সাশ্রয়িতা নিশ্চিত করে। AI এবং ডিজিটাল বই একসাথে কাজ করে, জ্ঞান
                 অর্জনের এবং শেখার পদ্ধতিকে আরো দ্রুত, সহজ এবং উন্নত করে তুলছে।
-              </p>
-            </div>
+              </motion.p>
+            </article>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <article className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <StatCard
                 number="30%"
                 label="নিয়মিত ই-বুক পাঠক"
@@ -129,7 +193,7 @@ export function DoYouKnowSection() {
                 label="যেকোনো সময় অ্যাক্সেস"
                 className="bg-yellow-50"
               />
-            </div>
+            </article>
           </motion.div>
         </div>
 
@@ -146,7 +210,7 @@ export function DoYouKnowSection() {
               opacity: 1,
             }}
             transition={{
-              duration: 0.5,
+              duration: 0.2,
               ease: "linear",
             }}
           />

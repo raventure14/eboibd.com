@@ -18,7 +18,7 @@ export function ClauseCard({
   className,
 }: ClauseCardProps) {
   return (
-    <motion.div
+    <motion.article
       initial={{
         scale: 0,
       }}
@@ -26,19 +26,19 @@ export function ClauseCard({
         scale: 1,
       }}
       transition={{
-        duration: 0.5,
+        duration: 0.2,
         ease: "linear",
       }}
       className={cn(
         "bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 z-30 justify-between items-center flex flex-col",
-        "border border-purple-100/20 backdrop-blur-sm",
+        "border border-purple-100/20 backdrop-blur-sm max-w-[496px]",
         className
       )}
     >
       <motion.div
         initial={{ y: -30, opacity: 0.1 }}
         whileInView={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.4, delay: 0.3 }}
+        transition={{ duration: 0.1, delay: 0.1 }}
         className="mx-auto bg-purple-100 w-14 h-14 rounded-full flex items-center justify-center mb-4"
       >
         <Icon className="w-8 h-8 text-purple-600" />
@@ -46,7 +46,7 @@ export function ClauseCard({
       <motion.h3
         initial={{ x: -40, opacity: 0.1 }}
         whileInView={{ x: 0, opacity: 1 }}
-        transition={{ duration: 0.4, delay: 0.4 }}
+        transition={{ duration: 0.1, delay: 0.2 }}
         className="text-center text-xl font-semibold text-heading mb-3 md:whitespace-nowrap"
       >
         {title}
@@ -54,11 +54,11 @@ export function ClauseCard({
       <motion.p
         initial={{ x: -60, opacity: 0.1 }}
         whileInView={{ x: 0, opacity: 1 }}
-        transition={{ duration: 0.4, delay: 0.6 }}
+        transition={{ duration: 0.1, delay: 0.3 }}
         className="text-center text-para leading-relaxed"
       >
         {description}
       </motion.p>
-    </motion.div>
+    </motion.article>
   );
 }

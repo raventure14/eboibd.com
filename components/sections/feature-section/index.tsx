@@ -6,7 +6,7 @@ import { FeatureCard } from "./_components/feature-card";
 
 export function FeaturesSection() {
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 " id="about-book"  >
+    <section className="py-16 px-4 sm:px-6 lg:px-8 overflow-hidden " id="about-book"  >
       <div className="container mx-auto">
         <motion.div
           initial={{ y: 60, opacity: 0.1 }}
@@ -14,7 +14,7 @@ export function FeaturesSection() {
             y: 0,
             opacity: 1,
           }}
-          transition={{ duration: 0.4, ease: "easeOut" }}
+          transition={{ duration: 0.1, ease: "easeOut" }}
           className="text-center mb-12"
         >
           <h2 className="text-4xl font-bold mb-6">
@@ -28,7 +28,7 @@ export function FeaturesSection() {
             <motion.p
               initial={{ x: -50, opacity: 0.1 }}
               whileInView={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.4, ease: "easeIn" }}
+              transition={{ duration: 0.1, ease: "easeIn" }}
               className="text-lg text-para max-w-3xl text-left"
             >
               এই বইটি আপনাকে শূন্য থেকে ChatGPT সম্পর্কে ধারণা দেবে। এটি ব্যবহার
@@ -90,7 +90,7 @@ export function FeaturesSection() {
             className="w-full lg:w-5/12 flex justify-center"
           >
             <BookPreview
-              src="/features/book.png"
+              src="/features/book.webp"
               alt="How to use chat gpt in a write way"
             />
           </motion.div>

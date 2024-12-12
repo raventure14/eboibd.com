@@ -1,4 +1,4 @@
-import { Book, Heart } from "lucide-react";
+import {  BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -11,10 +11,10 @@ export default function Footer() {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Left Column */}
-          <div className="space-y-6 grid grid-cols-2 items-center md:grid-cols-1">
+          <div className=" grid grid-cols-2 items-start md:grid-cols-1">
             <div className="flex items-center gap-2">
-              <Book className="w-8 h-8 text-[#00C49A]" />
-              <span className="text-xl font-medium text-heading">RA Venture</span>
+              <BookOpen className="w-8 h-8 text-[#00C49A]" />
+              <span className="text-xl font-medium text-heading">E-Boi</span>
             </div>
 
             <div className="space-y-1">
@@ -69,6 +69,11 @@ export default function Footer() {
               <Input
                 type="email"
                 placeholder="example@gmail.com"
+                className="bg-[#E5E5E5] border-0"
+              />
+              <Input
+                type="text"
+                placeholder="your phone number(optional)"
                 className="bg-[#E5E5E5] border-0"
               />
               <Textarea

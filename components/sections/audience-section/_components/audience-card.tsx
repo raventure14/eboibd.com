@@ -18,27 +18,27 @@ export function AudienceCard({
   className,
 }: AudienceCardProps) {
   return (
-    <motion.div
+    <motion.article
       initial={{
-        scale: 0,
+        opacity: 0,
       }}
       whileInView={{
-        scale: 1,
+        opacity: 1,
       }}
       transition={{
-        duration: 0.6,
+        duration: 0.2,
         ease: "linear",
       }}
       className={cn(
         "bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 origin-center ",
-        "border border-purple-100/20 backdrop-blur-sm",
+        "border border-purple-100/20 backdrop-blur-sm max-w-[350px] lg:max-w-[496px]",
         className
       )}
     >
       <motion.div
         initial={{ y: -30, opacity: 0.1 }}
         whileInView={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.4, delay: 0.3 }}
+        transition={{ duration: 0.2, delay: 0.2 }}
         className="bg-purple-100 w-14 h-14 rounded-full flex items-center justify-center mb-4 mx-auto md:mx-0 "
       >
         <Icon className="w-8 h-8 text-purple-600" />
@@ -46,7 +46,7 @@ export function AudienceCard({
       <motion.h3
         initial={{ x: 40, opacity: 0.1 }}
         whileInView={{ x: 0, opacity: 1 }}
-        transition={{ duration: 0.4, delay: 0.4 }}
+        transition={{ duration: 0.2, delay: 0.3 }}
         className=" text-center md:text-left text-xl font-semibold text-heading mb-3"
       >
         {title}
@@ -54,11 +54,11 @@ export function AudienceCard({
       <motion.p
         initial={{ y: 40, opacity: 0.1 }}
         whileInView={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.4, delay: 0.5 }}
+        transition={{ duration: 0.2, delay: 0.4 }}
         className="text-center md:text-left text-para leading-relaxed"
       >
         {description}
       </motion.p>
-    </motion.div>
+    </motion.article>
   );
 }

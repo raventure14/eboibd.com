@@ -11,7 +11,7 @@ const links = [
 
 export function NavLinks() {
   return (
-    <nav className="hidden md:flex items-center gap-8">
+    <nav className="hidden md:flex flex-col md:flex-row items-center gap-8">
       {links.map((link) => (
         <Link
           key={link.href}

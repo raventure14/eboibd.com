@@ -23,24 +23,25 @@ export default function PricingSection() {
               initial={{ x: "-100%", opacity: 0.1 }}
               whileInView={{ x: 0, opacity: 1 }}
               transition={{
-                duration: 0.4,
+                duration: 0.2,
                 ease: "linear",
               }}
-              className="text-3xl md:text-4xl lg:text-6xl !leading-tight font-bold tracking-tight  text-heading z-30"
+              className="text-3xl md:text-4xl lg:text-6xl !leading-tight font-bold tracking-tight  text-heading z-30 text-center md:text-left"
             >
+              <span> আজই শুরু করুন</span>
+              <br />
               <span>আপনার</span>{" "}
-              <span className="text-[#7C3AED]">AI জার্নি</span> <br />
-              <span> আজই শুরু করুন!</span>
+              <span className="text-[#7C3AED]">AI জার্নি!</span>
             </motion.h1>
             <motion.p
               initial={{ x: "-100%", opacity: 0.1 }}
               whileInView={{ x: 0, opacity: 1 }}
               transition={{
-                duration: 0.4,
+                duration: 0.2,
                 ease: "linear",
-                delay: 0.5,
+                delay: 0.3,
               }}
-              className="text-base md:text-lg text-para font-semibold z-30"
+              className="text-base md:text-lg text-para font-semibold z-30 text-center md:text-left"
             >
               AI টুলসের শক্তি ব্যবহার করে কিভাবে দৈনন্দিন জটিল কাজগুলো সহজে
               সম্পন্ন করবেন এবং নিজের দক্ষতা একধাপ এগিয়ে নিয়ে যাবেন, তা শিখুন
@@ -58,17 +59,20 @@ export default function PricingSection() {
             }}
           >
             <Card className="w-full max-w-md mx-auto rounded-2xl shadow-lg relative overflow-hidden z-30">
-              <motion.div  initial={{scale:2, opacity: 0 }}
-                  whileInView={{
-                    scale:1,
-                    opacity: 1,
-                  }}
-                  transition={{
-                    duration: 0.6,
-                    ease: "anticipate",
-                    delay: 1.2,
-                  }}  className="bg-cta/20 py-2 px-2 absolute top-2 right-2 rounded-xl">
-                <p className="text-cta font-semibold italic">save 74%+</p>
+              <motion.div
+                initial={{ scale: 2, opacity: 0 }}
+                whileInView={{
+                  scale: 1,
+                  opacity: 1,
+                }}
+                transition={{
+                  duration: 0.4,
+                  ease: "anticipate",
+                  delay: 0.8,
+                }}
+                className="bg-cta/20 py-2 px-2 absolute top-2 right-2 rounded-xl"
+              >
+                <p className="text-cta font-semibold italic">save 71%+</p>
               </motion.div>
               <CardHeader className="text-center space-y-2 pb-0 mt-10">
                 <CardTitle className="text-4xl  flex justify-center gap-5">
@@ -140,7 +144,8 @@ export default function PricingSection() {
                   </Button>
                 </motion.div>
 
-                <motion.div   initial={{ opacity: 0 }}
+                <motion.div
+                  initial={{ opacity: 0 }}
                   whileInView={{
                     opacity: 1,
                   }}
@@ -148,7 +153,9 @@ export default function PricingSection() {
                     duration: 0.6,
                     ease: "anticipate",
                     delay: 1,
-                  }}className=" w-full flex justify-center space-y-4 text-center">
+                  }}
+                  className=" w-full flex justify-center space-y-4 text-center"
+                >
                   <div className="flex items-center gap-3">
                     <ArrowLeftIcon className="w-6 h-6 text-[#7C3AED]" />
                     <span className="text-gray-600">ফ্রি লাইফটাইম এক্সেস </span>

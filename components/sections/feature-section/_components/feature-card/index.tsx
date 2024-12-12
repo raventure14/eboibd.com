@@ -11,7 +11,7 @@ interface FeatureCardProps {
 
 export function FeatureCard({ icon, title, className }: FeatureCardProps) {
   return (
-    <motion.div
+    <motion.article
       initial={{
         scale: 0,
       }}
@@ -19,7 +19,7 @@ export function FeatureCard({ icon, title, className }: FeatureCardProps) {
         scale: 1,
       }}
       transition={{
-        duration: 0.4,
+        duration: 0.2,
         ease: "easeInOut",
       }}
       className={cn("bg-white rounded-xl p-6 shadow-card2", className)}
@@ -27,7 +27,7 @@ export function FeatureCard({ icon, title, className }: FeatureCardProps) {
       <motion.div
         initial={{ y: -30, opacity: 0.1 }}
         whileInView={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.4, delay: 0.3 }}
+        transition={{ duration: 0.2, delay: 0.2 }}
         className=" h-16 mb-4 relative w-full flex justify-center items-center"
       >
         <Image
@@ -41,11 +41,11 @@ export function FeatureCard({ icon, title, className }: FeatureCardProps) {
       <motion.h3
         initial={{ x: -40, opacity: 0.1 }}
         whileInView={{ x: 0, opacity: 1 }}
-        transition={{ duration: 0.4, delay: 0.4 }}
+        transition={{ duration: 0.2, delay: 0.3 }}
         className="text-center text-lg lg:text-xl font-medium text-para mt-2"
       >
         {title}
       </motion.h3>
-    </motion.div>
+    </motion.article>
   );
 }
