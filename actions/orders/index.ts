@@ -6,10 +6,6 @@ import { prismaDB } from "@/lib/prismal"
 export async function onGetResentOrders() {
     try {
         const recentOrders = await prismaDB.order.findMany({
-            include:{
-                payment:true,
-                
-            },
             orderBy:{
                 createdAt: "desc"
             },

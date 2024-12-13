@@ -31,6 +31,7 @@ enum PaymentStatus {
   CONFIRMED
   PENDING
   FAILED
+  CANCELD
 }
 
 model Order {

@@ -13,25 +13,19 @@ export const getDashboardStats = async () => {
         ] = await Promise.all([
           prismaDB.order.findMany({
             where: {
-              status: 'CONFIRMED',
+              orderStatus: 'CONFIRMED',
             },
-            include:{
-                payment:{
-                    select:{
-                        amount:true
-                    }
-                }
-            }
+          
 
           }),
           prismaDB.order.count({
             where: {
-              status: 'CANCELD',
+              orderStatus: 'CANCELD',
             },
           }),
           prismaDB.order.count({
             where: {
-              status: 'FAILED',
+              orderStatus: 'FAILED',
             },
           }),
          prismaDB.clicks.findMany({
@@ -42,7 +36,7 @@ export const getDashboardStats = async () => {
         ]);
     
         // Accessing the total revenue amount from the aggregated result
-        const totalRevenue = confirmedOrders.reduce((sum, order) => sum + order.payment.amount, 0);
+        const totalRevenue = confirmedOrders.reduce((sum, order) => sum + order.amount, 0);
     
         const totalClicks = clickAnalytics.reduce((acc, curr) => acc + curr.totalClicks, 0);
         const conversionRate =
