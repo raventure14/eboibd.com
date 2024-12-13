@@ -4,9 +4,9 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 const links = [
-  { href: "#about-book", label: "About Book" },
-  { href: "#benefits", label: "Benefits" },
-  { href: "#", label: "E-books" },
+  { href: "/#about-book", label: "About Book" },
+  { href: "/#benefits", label: "Benefits" },
+  { href: "/#", label: "E-books" },
 ];
 
 export function NavLinks() {

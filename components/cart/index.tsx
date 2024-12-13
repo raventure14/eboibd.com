@@ -3,13 +3,34 @@ import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import useCart from "@/store/cart";
 import Image from "next/image";
-import React, { useState } from "react";
-import { X } from "lucide-react";
-import { Button } from "../ui/button";
+import React, { useEffect, useState } from "react";
+import { Loader, X } from "lucide-react";
 import Link from "next/link";
+import { Book } from "@prisma/client";
+import { onGetBook } from "@/actions/book";
 
 const Cart = () => {
-  const {isOpen, setIsOpen} = useCart((state) => state);
+  const { isOpen, setIsOpen } = useCart((state) => state);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [book, setBook] = useState<Book | null>(null);
+
+  useEffect(() => {
+    async function getBook() {
+      try {
+        setLoading(true);
+        const response = await onGetBook();
+        if (response.book) {
+          setBook(response.book);
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    getBook()
+  },[]);
+
   return (
     <motion.div
       initial={{ x: 50, opacity: 0 }}
@@ -25,44 +46,57 @@ const Cart = () => {
           Your Cart
         </h2>
 
-        <X className="text-para cursor-pointer hover:text-heading transition-all duration-200 ease-linear" onClick={() =>setIsOpen(!isOpen)} />
+        <X
+          className="text-para cursor-pointer hover:text-heading transition-all duration-200 ease-linear"
+          onClick={() => setIsOpen(!isOpen)}
+        />
       </div>
-
-      <div className="h-full flex flex-col justify-between pb-2">
-        <div className="px-1">
-          <div className="w-full flex justify-between items-center gap-1 px-2 py-4 border rounded-sm mt-4">
-            <div className=" flex justify-center items-center border rounded-sm p-1 shadow-md ">
-              <Image
-                src={"/features/book.webp"}
-                alt="Know everything about ChatGPT"
-                height={1000}
-                width={1000}
-                className="w-28 object-cover rounded-sm"
-              />
-            </div>
-            <div className=" flex flex-col justify-start items-start h-full">
-              <h2 className="text-heading px-4  font-semibold text-sm text-left">
-                ChatGPT নিয়ে e-Book এর বিষয়বস্তু
-              </h2>
-              <div className="flex justify-start items-center gap-2 px-4">
-                <span className="text-para text-sm font-semibold py-1">
-                  71%+
-                </span>
+      {loading && (
+        <div className="h-full w-full flex justify-center items-center   ">
+          <Loader className="h-10 w-10 animate-spin" />
+        </div>
+      )}
+      {!loading && book && (
+        <div className="h-full flex flex-col justify-between pb-2">
+          <div className="px-1">
+            <div className="w-full flex justify-between items-center gap-1 px-2 py-4 border rounded-sm mt-4">
+              <div className=" flex justify-center items-center border rounded-sm p-1 shadow-md ">
+                <Image
+                  src={"/features/book.webp"}
+                  alt={book.name}
+                  height={1000}
+                  width={1000}
+                  className="w-28 object-cover rounded-sm"
+                />
               </div>
-              <div className="flex justify-between items-center gap-2 px-4 ">
-                <span className="text-highlight text-base font-semibold">
-                  ৳.১৬৯
-                </span>
-                <s className="text-para text-base font-semibold">৳.৬০০</s>
+              <div className=" flex flex-col justify-start items-start h-full">
+                <h2 className="text-heading px-4  font-semibold text-sm text-left">
+                  {book.name}
+                </h2>
+                <div className="flex justify-start items-center gap-2 px-4">
+                  <span className="text-para text-sm font-semibold py-1">
+                    71%+
+                  </span>
+                </div>
+                <div className="flex justify-between items-center gap-2 px-4 ">
+                  <span className="text-highlight text-base font-semibold">
+                    TK.{book.offerPrice}
+                  </span>
+                  <s className="text-para text-base font-semibold">TK.{book.actualPrice}</s>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <Link href={"/checkout"} className=" w-full mx-auto bg-cta/90 hover:bg-cta/100 text-white px-6 sm:px-8 py-3  g rounded-sm transition-colors z-20 text-center text-base md:text-lg lg:text-xl ">
-          Checkout
-        </Link>
-      </div>
+          <Link
+            href={`/checkout/${book.slug}`}
+            onClick={() =>setIsOpen()}
+            className=" w-full mx-auto bg-cta/90 hover:bg-cta/100 text-white px-6 sm:px-8 py-3  g rounded-sm transition-colors z-20 text-center text-base md:text-lg lg:text-xl "
+          >
+            Checkout
+          </Link>
+        </div>
+      )}
     </motion.div>
   );
 };
