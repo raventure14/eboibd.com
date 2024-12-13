@@ -8,18 +8,11 @@ export const getDashboardOverview = async () => {
   try {
     const orders = await prismaDB.order.findMany({
       where: {
-        status: "CONFIRMED",
+        orderStatus: "CONFIRMED",
       },
       orderBy: {
         createdAt: "asc",
       },
-      include:{
-        payment:{
-          select:{
-            amount:true
-          }
-        }
-      }
     });
 
     const dailyRevinue = orders.reduce((acc: any[], order: any) => {

@@ -5,6 +5,7 @@ import { Button } from "../ui/button";
 import { Rating } from "../ui/rating";
 import { onCreateClick } from "@/actions/dayly-clicks";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 type AnimationType = {
   x?:number|string, opacity?:number, y?:number|string; scale?:number
@@ -23,8 +24,10 @@ const CallToAction = ({
   whileInview,
   transition
 }: Props) => {
+  const router = useRouter()
 
   const handleOnClick = async () =>{
+    router.replace("/checkout/chat-gpt-ai-prompt-book")
     const date = new Date()
     const newClick = await onCreateClick({
       day:date.getDay(),
@@ -70,6 +73,7 @@ const CallToAction = ({
         transition={transition}
         className="w-full relative mx-auto "
       >
+        
         <Button className=" text-sm md:text-base w-[90%] md:w-auto bg-cta/90 hover:bg-cta/100 text-white px-6 sm:px-8 py-5 sm:py-6  sm:text-lg rounded-md transition-colors z-20" onClick={handleOnClick}>
           {ctaText} - মাত্র 169 টাকায়!
         </Button>

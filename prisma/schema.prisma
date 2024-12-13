@@ -27,43 +27,40 @@ model User {
   updatedAt DateTime @default(now()) @updatedAt
 }
 
+enum PaymentStatus {
+  CONFIRMED
+  PENDING
+  FAILED
+  CANCELD
+}
+
 model Order {
-  id            String @id @default(uuid())
+  id            String        @id @default(uuid())
   customerName  String
   customerEmail String
-  status        String
+  customerPhone String?
+  transactionId String
+  amount        Int
+  paymentStatus PaymentStatus @default(PENDING)
+  orderStatus   PaymentStatus @default(PENDING)
+  paymentMethod String
+
+  userAgreement Boolean @default(false)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
-
-  // Relation with Payment
-  paymentId String
-  payment   Payment @relation(fields: [paymentId], references: [id])
 
   //  Relation with book
   bookId String
   book   Book   @relation(fields: [bookId], references: [id])
 }
 
-model Payment {
-  id String @id @default(uuid())
-
-  amount Int
-  status PaymentStatus
-
-  order Order[]
-  
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
-
-  // Relation with Order
-
-}
 
 model Book {
   id String @id @default(uuid())
 
   name        String
+  slug        String
   actualPrice Int
   offerPrice  Int
   order       Order[]
@@ -72,22 +69,15 @@ model Book {
   updatedAt DateTime @default(now()) @updatedAt
 }
 
-enum PaymentStatus {
-  SUCCESS
-  CANCELED
-  FAILED
-}
-
 model Clicks {
   id String @id @default(uuid())
 
   totalClicks Int @default(0)
 
-  day Int
+  day   Int
   month Int
-  year Int
+  year  Int
 
- 
   createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt 
+  updatedAt DateTime @default(now()) @updatedAt
 }

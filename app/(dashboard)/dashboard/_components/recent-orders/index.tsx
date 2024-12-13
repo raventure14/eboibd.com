@@ -41,18 +41,18 @@ export function RecentOrders() {
             <TableCell>
               <Badge
                 variant={
-                  order.status === "CONFIRMED"
+                  order.orderStatus === "CONFIRMED"
                     ? "success"
-                    : order.status === "FAILED"
+                    : order.orderStatus === "FAILED"
                     ? "destructive"
                     : "secondary"
                 }
               >
-                {order.status}
+                {order.orderStatus}
               </Badge>
             </TableCell>
             <TableCell className="text-right">
-              ${order.payment.amount.toFixed(2)}
+              ${order.amount.toFixed(2)}
             </TableCell>
           </TableRow>
         ))}
