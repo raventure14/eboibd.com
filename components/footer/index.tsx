@@ -19,9 +19,13 @@ export default function Footer() {
 
             <div className="space-y-1">
               <h3 className="font-medium text-lg text-heading">Address:</h3>
-              <p className="text-para">123 Main Street, City</p>
-              <p className="text-para">State Province, Country</p>
+              <p className="text-para">Uttara Model Town,</p>
+              <p className="text-para">Dhaka North City Corporation,</p>
+              <p className="text-para">Dhaka -1230, Bangladesh</p>
             </div>
+            
+
+
 
             <div className="flex gap-4">
               <Link href="#">
@@ -89,12 +93,8 @@ export default function Footer() {
           {/* Right Column */}
           <div className="space-y-6">
             <h2 className="text-2xl font-medium">About Us</h2>
-            <p className="text-para leading-relaxed">
-              Lorem ipsum dolor sit amet et delectus accommodare his consul
-              copiosae legendos at vix ad putent delectus delicata usu. Vidit
-              dissentiet eos cu eum an brute copiosae hendrerit. Eos erant
-              dolorum an. Per facer affert ut. Mei iisque mentitum moderatius
-              cu. Sit munere
+            <p className="text-para leading-relaxed">{`
+            E-Boi, a brainchild of RA Venture, is dedicated to making books accessible to everyone, anytime and anywhere. Our goal is to ensure that people from all walks of life can easily access knowledge. We publish ebooks in Bangla across various niches, focusing on adding value to readers' lives`}
             </p>
             <div className="flex gap-8">
               <a href="#" className="text-para hover:text-gray-900">

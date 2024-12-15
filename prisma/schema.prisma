@@ -9,7 +9,8 @@ generator client {
 
 datasource db {
   provider = "postgresql" // Change this to "mysql" or "sqlite" if using a different DB
-  url      = env("DIRECT_URL") // Add this variable in your .env file
+  url      = env("DATABASE_URL") // Add this variable in your .env file
+  directUrl      = env("DIRECT_URL") // Add this variable in your .env file
 }
 
 enum Role {
@@ -33,6 +34,10 @@ enum PaymentStatus {
   FAILED
   CANCELD
 }
+enum PaymentMehod {
+  bkash
+  nagad
+}
 
 model Order {
   id            String        @id @default(uuid())
@@ -43,7 +48,7 @@ model Order {
   amount        Int
   paymentStatus PaymentStatus @default(PENDING)
   orderStatus   PaymentStatus @default(PENDING)
-  paymentMethod String
+  paymentMethod PaymentMehod
 
   userAgreement Boolean @default(false)
 

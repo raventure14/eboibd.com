@@ -11,7 +11,7 @@ import { checkoutFormSchema } from "@/components/forms/chekout/schema";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Book, Order } from "@prisma/client";
 import { z } from "zod";
-import { CheckoutPayload, onCheckout } from "@/actions/checkout";
+import { CheckoutPayload, onCheckout, PaymentMethod } from "@/actions/checkout";
 import { toast } from "sonner";
 import { Variable } from "lucide-react";
 import { useEffect } from "react";
@@ -26,7 +26,7 @@ type CheckoutFormReturn = {
 };
 type BookData = Book | undefined;
 export const useCheckoutForm = (bookData: BookData) => {
-  const router = useRouter()
+  const router = useRouter();
   const {
     formState: { errors },
     register,
@@ -48,7 +48,6 @@ export const useCheckoutForm = (bookData: BookData) => {
     reValidateMode: "onChange",
   });
 
-
   const client = useQueryClient();
 
   const { mutate, isPending, error, variables } = useMutation({
@@ -61,8 +60,9 @@ export const useCheckoutForm = (bookData: BookData) => {
           bookId: bookData.id,
           amount: bookData.offerPrice,
           transactionId: data.transactionId,
-          paymentMethod: data.paymentMethod,
+          paymentMethod: data.paymentMethod as PaymentMethod,
           userAgreement: data.userAgreement,
+          orderStatus:"CONFIRMED"
         };
         const checkout = await onCheckout(checkoutPayload);
 
@@ -70,22 +70,24 @@ export const useCheckoutForm = (bookData: BookData) => {
       }
       return null;
     },
-    onSuccess: () => toast.success("Checkout completed successfully"),
-    onError: () => toast.error("Something went wrong"),
+    onSuccess: () => {
+
+      router.replace("/thank-you");
+    },
+    onError: () => {
+      toast.error("Something went wrong");
+    },
     onMutate: () => reset(),
+   
   });
 
   const onInvalid = (errors: FieldErrors<FieldValues>) => {
     console.log(errors);
   };
 
-  const onHandleChekcout = handleSubmit(
-    async (values) => {
-     await mutate(values)
-     router.replace("/thank-you")
-    },
-    onInvalid
-  );
+  const onHandleChekcout = handleSubmit(async (values) => {
+    await mutate(values);
+  }, onInvalid);
 
   return {
     register,
@@ -93,6 +95,6 @@ export const useCheckoutForm = (bookData: BookData) => {
     onHandleChekcout,
     isPending,
     variables,
-    setValue
+    setValue,
   };
 };

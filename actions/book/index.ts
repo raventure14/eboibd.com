@@ -7,7 +7,8 @@ export const onGetBook =async () =>{
         const book = await prismaDB.book.findFirst({
             where:{
                 slug:"chatgpt-ai-prompt-mastery"
-            }
+            },
+            
         })
         if(!book){
             return {
