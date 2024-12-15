@@ -21,11 +21,16 @@ import {
 import { cn } from "@/lib/utils";
 import { CalendarIcon } from "lucide-react";
 import { OrdersTable } from "./_components/orders-table";
+import { DataTable } from "./_components/table/data-table";
+import { columns } from "./_components/table/columns";
+import { onGetOrders } from "@/actions/orders";
+import { Order, OrderResponse } from "@/types";
 
 export default function OrdersPage() {
   const [customerFilter, setCustomerFilter] = useState("");
   const [statusFilter, setStatusFilter] = useState<string | null>(null);
-  const [dateFilter, setDateFilter] = useState<Date>();
+  const [dateFilter, setDateFilter] = useState<Date|null>(null);
+  
 
   const { data: orders, refetch } = useQuery({
     queryKey: ["orders", customerFilter, statusFilter, dateFilter],
@@ -35,10 +40,30 @@ export default function OrdersPage() {
       if (statusFilter) params.append("status", statusFilter);
       if (dateFilter) params.append("date", dateFilter.toISOString());
 
-      const res = await fetch(`/api/orders?${params.toString()}`);
-      return res.json();
+      const res = await onGetOrders({});
+      const orders = res.orders;
+      if (orders) {
+        const transformedData: Order[] = orders.map((item) => ({
+          id: item.id,
+          customerName: item.customerName,
+          customerEmail: item.customerEmail,
+          customerPhone: item.customerPhone,
+          amount: item.amount,
+          paymentMethod: item.paymentMethod,
+          bookName: item.book.name,
+          paymentStatus: item.paymentStatus,
+          orderStatus: item.orderStatus,
+          userAgreement: item.userAgreement,
+          createdAt: item.createdAt,
+          transactionId: item.transactionId,
+        }));
+        return transformedData;
+      }
+      if (res.status === 404) return null;
     },
   });
+
+  console.log(orders);
 
   const handleStatusUpdate = async () => {
     await refetch();
@@ -50,64 +75,7 @@ export default function OrdersPage() {
         <h2 className="text-3xl font-bold tracking-tight">Orders</h2>
       </div>
 
-      <div className="flex gap-4 items-center">
-        <Input
-          placeholder="Search by customer name..."
-          value={customerFilter}
-          onChange={(e) => setCustomerFilter(e.target.value)}
-          className="max-w-xs"
-        />
-
-        <Select
-          value={statusFilter || undefined}
-          onValueChange={setStatusFilter}
-        >
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Filter by status" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="CONFIRMED">Confirmed</SelectItem>
-            <SelectItem value="FAILED">Failed</SelectItem>
-            <SelectItem value="CANCELED">Canceled</SelectItem>
-          </SelectContent>
-        </Select>
-
-        <Popover>
-          <PopoverTrigger asChild>
-            <Button
-              variant="outline"
-              className={cn(
-                "w-[200px] justify-start text-left font-normal",
-                !dateFilter && "text-muted-foreground"
-              )}
-            >
-              <CalendarIcon className="mr-2 h-4 w-4" />
-              {dateFilter ? format(dateFilter, "PPP") : "Pick a date"}
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="w-auto p-0" align="start">
-            <Calendar
-              mode="single"
-              selected={dateFilter}
-              onSelect={setDateFilter}
-              initialFocus
-            />
-          </PopoverContent>
-        </Popover>
-
-        <Button
-          variant="ghost"
-          onClick={() => {
-            setCustomerFilter("");
-            setStatusFilter(null);
-            setDateFilter(undefined);
-          }}
-        >
-          Reset Filters
-        </Button>
-      </div>
-
-      <OrdersTable orders={orders} onStatusUpdate={handleStatusUpdate} />
+      {orders && <DataTable columns={columns} data={orders} />}
     </div>
   );
 }

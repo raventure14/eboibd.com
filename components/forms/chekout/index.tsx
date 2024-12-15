@@ -17,9 +17,17 @@ const CheckoutForm =  () => {
 
   useEffect(() => {
     async function getBookData() {
-      const response = await onGetBook()
-      if(response.status === 200){
-        setBook(response.book)
+      try {
+        
+        const response = await onGetBook()
+        if(response.status === 200){
+          setBook(response.book)
+        }
+        
+        setIsMounted(true)
+      } catch (error) {
+        console.log(error)
+      } finally {
         setIsMounted(true)
       }
     }

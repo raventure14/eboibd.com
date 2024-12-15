@@ -1,8 +1,9 @@
 "use server"
 
 import { prismaDB } from "@/lib/prismal"
-import { Order } from "@prisma/client"
-
+import { PaymentStatus } from "@prisma/client";
+import { revalidatePath } from "next/cache";
+export type PaymentMethod = "bkash"|"nagad"
 export type CheckoutPayload = {
 
     customerName: string;
@@ -11,8 +12,9 @@ export type CheckoutPayload = {
     transactionId: string;
     amount: number;
     bookId: string;
-    paymentMethod:string;
-    userAgreement:boolean
+    paymentMethod:PaymentMethod;
+    userAgreement:boolean;
+    orderStatus:PaymentStatus
 }
 export const onCheckout = async( data:CheckoutPayload) => {
 try {
@@ -26,6 +28,7 @@ try {
             info:newCheckout
         }
     }
+    revalidatePath("/orders")
     return {
         status:201,
         message:"Checkout compoeted successfully"

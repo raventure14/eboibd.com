@@ -1,15 +1,17 @@
 "use client";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { DollarSign, Users, ArrowUpRight, ArrowDownRight } from "lucide-react";
+import { DollarSign, Users, ArrowUpRight, ArrowDownRight, Loader } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { getDashboardStats } from "@/actions/stats";
+import CardSkeleton from "./_components/card-skeleton";
 
 export function DashboardStats() {
-  const { data: stats } = useQuery({
+  const { data: stats, isPending } = useQuery({
     queryKey: ["dashboard-stats"],
     queryFn: async () => {
       const res = await getDashboardStats();
+      if(!res?.data) return null
       return res?.data;
     },
   });
@@ -30,6 +32,13 @@ export function DashboardStats() {
       trend: "up",
     },
     {
+      title: "Pending Orders",
+      value: stats?.pendingOrders || "0",
+      icon: Users,
+      change: "+7.2%",
+      trend: "up",
+    },
+    {
       title: "Conversion Rate",
       value: stats?.conversion || "0%",
       icon: ArrowUpRight,
@@ -44,8 +53,8 @@ export function DashboardStats() {
   ];
 
   return (
-    <div className="grid gap-4 md:grid-cols-3">
-      {items.map((item) => (
+    <div className="grid gap-4 md:grid-cols-4">
+      {!isPending && items.map((item) => (
         <Card key={item.title}>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">{item.title}</CardTitle>
@@ -75,6 +84,13 @@ export function DashboardStats() {
           </CardContent>
         </Card>
       ))}
+      {
+        isPending && (
+          items.map((item) => (
+            <CardSkeleton key={item.title} />
+          ))
+        )
+      }
     </div>
   );
 }
