@@ -12,6 +12,12 @@ export const columns: ColumnDef<Order>[] = [
     ),
   },
   {
+    accessorKey: "customerEmail",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Customer Email" />
+    ),
+  },
+  {
     accessorKey: "bookName",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Book Name" />

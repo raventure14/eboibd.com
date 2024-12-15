@@ -1,48 +1,25 @@
-import { withAuth } from "next-auth/middleware";
-import { NextResponse } from "next/server";
-
-// export default withAuth(
-//   function middleware(req) {
-//     const token = req.nextauth.token;
-//     const isAdmin = token?.role === "ADMIN";
-//     const isAuthPage = req.nextUrl.pathname.startsWith("/auth/login");
-
-//     if (isAuthPage && token) {
-//       return NextResponse.redirect(new URL("/dashboard", req.url));
-//     }
-
-//     if (!isAdmin && req.nextUrl.pathname.startsWith("/dashboard")) {
-//       return NextResponse.redirect(new URL("/auth/login", req.url));
-//     }
-
-//     return NextResponse.next();
-//   },
-//   {
-//     callbacks: {
-//       authorized: ({ token }) => !!token,
-//     },
-//   },
-  
-// );
-
 import { getToken } from "next-auth/jwt";
-import { NextRequest } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function middleware(req: NextRequest) {
-  const token = await getToken({ req});
-  console.log("Token: ", token)
+  // Extract token from the request
+  const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+
   const url = req.nextUrl;
-  if (
-    token && url.pathname.startsWith("/auth")
-  ) {
+
+  // Redirect authenticated users away from the auth pages
+  if (token && url.pathname === "/auth/login") {
     return NextResponse.redirect(new URL("/dashboard", req.url));
   }
 
-  if (!token && url.pathname.includes("/dashboard")) {
+  // Redirect unauthenticated users away from protected dashboard pages
+  if (!token && url.pathname.startsWith("/dashboard")) {
     return NextResponse.redirect(new URL("/auth/login", req.url));
   }
-}
 
+  // Allow the request to proceed
+  return NextResponse.next();
+}
 export const config = {
   matcher: ["/dashboard/:path*", "/auth/login"],
 };
