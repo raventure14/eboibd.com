@@ -7,14 +7,18 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Loader } from "lucide-react";
+import toast from "react-hot-toast";
 
 export default function LoginPage() {
   const router = useRouter();
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false)
   const { register, handleSubmit } = useForm();
 
   const onSubmit = async (data: any) => {
     try {
+      setLoading(true)
       const result = await signIn("credentials", {
         redirect: false,
         email: data.email,
@@ -25,10 +29,12 @@ export default function LoginPage() {
         setError("Invalid credentials");
         return;
       }
-
+      toast.success("Login successfully.")
       router.push("/dashboard");
     } catch (error) {
       setError("An error occurred");
+    } finally {
+      setLoading(false)
     }
   };
 
@@ -57,8 +63,8 @@ export default function LoginPage() {
               
             </div>
             {error && <p className="text-red-500 text-sm">{error}</p>}
-            <Button type="submit" className="w-full">
-              Sign In
+            <Button disabled={loading} type="submit" className="w-full">
+              {loading?<>Please wait <Loader className="animate-spin" /></>:"Sign In"}
             </Button>
           </form>
         </CardContent>

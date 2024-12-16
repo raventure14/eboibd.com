@@ -25,7 +25,6 @@ export const authOptions: NextAuthOptions = {
         if(!user) throw new Error("Invalid credential!")
 
         const isMatchedPassword = await bcrypt.compare(credentials.password, user?.password!)
-        console.log("password: ", isMatchedPassword)
         if(!isMatchedPassword) throw new Error("Invalid credential!")
 
 
@@ -52,11 +51,11 @@ export const authOptions: NextAuthOptions = {
       return session;
     },
   },
-  session: {
-    strategy: "jwt",
-  },
   pages: {
     signIn: "/auth/login",
+  },
+  session: {
+    strategy: "jwt",
   },
   secret: process.env.NEXTAUTH_SECRET,
 };
