@@ -16,14 +16,14 @@ export function TestimonialsSection() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.2 }}
           >
-            <div className="relative w-full max-w-md mx-auto lg:mx-0">
+            <div className="relative h-full w-full max-w-md mx-auto lg:mx-0">
               <div className="absolute inset-0 bg-gradient-to-r from-purple-100 to-blue-100 rounded-full blur-3xl opacity-30" />
               <Image
-                src="/review-illustration.webp"
+                src="/review-illustration.avif"
                 alt="Readers Review"
                 width={300}
                 height={300}
-                className="relative z-10"
+                className="relative z-10 w-44 h-44 rounded-full"
                 priority
               />
             </div>

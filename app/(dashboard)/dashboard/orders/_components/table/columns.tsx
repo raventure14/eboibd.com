@@ -6,9 +6,21 @@ import { DataTableRowActions } from "./_components/data-table-row-action"
 
 export const columns: ColumnDef<Order>[] = [
   {
+    // Index Column
+    id: "index",
+    header: "No.",
+    cell: ({ row }) => <span>{row.index + 1}</span>, // 1-based index
+  },
+  {
     accessorKey: "customerName",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Customer Name" />
+    ),
+  },
+  {
+    accessorKey: "customerPhone",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Customer Phone" />
     ),
   },
   {
@@ -43,6 +55,12 @@ export const columns: ColumnDef<Order>[] = [
       <DataTableColumnHeader column={column} title="Date" />
     ),
     cell: ({ row }) => format(new Date(row.getValue("createdAt")), "PPP"),
+  },
+  {
+    accessorKey: "transactionId",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Transaction Id" />
+    ),
   },
   {
     accessorKey: "paymentStatus",
