@@ -8,9 +8,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Loader } from "lucide-react";
-import { toast } from "sonner";
 import Image from "next/image";
 import { Logo } from "@/components/ui/logo";
+import { toast } from "react-hot-toast";
+
 
 export default function LoginPage() {
   const router = useRouter();
