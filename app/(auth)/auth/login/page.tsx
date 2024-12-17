@@ -9,6 +9,8 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Loader } from "lucide-react";
 import { toast } from "sonner";
+import Image from "next/image";
+import { Logo } from "@/components/ui/logo";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -42,6 +44,7 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <Card className="w-[400px]">
         <CardHeader>
+         <Logo className="mx-auto h-14" />
           <CardTitle className="text-2xl font-bold text-center">Login</CardTitle>
         </CardHeader>
         <CardContent>

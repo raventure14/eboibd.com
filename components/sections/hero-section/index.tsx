@@ -119,15 +119,15 @@ export function HeroSection() {
             duration: 0.1,
             ease: "easeInOut",
           }}
-          className="flex-1 relative w-full max-w-[500px] lg:max-w-none z-20"
+          className="flex-1 relative w-full max-w-[400px] lg:max-w-none z-20"
         >
-          <div className="bg-[#B4EFE7] rounded-full absolute -z-10 h-full w-full left-0 " />
+          <div className="bg-[#B4EFE7] rounded-[70%] absolute bottom-0 -z-10 h-[50%] w-full left-0 backdrop-blur-2xl " />
           <Image
-            src="/laptop-with-shapes.webp"
-            alt="Laptop with 3D shapes"
-            width={600}
-            height={800}
-            className="relative z-10 w-full h-auto"
+            src="/hero-img.webp"
+            alt="Artificial intelligance, chagGPT, and prompt engineering"
+            width={400}
+            height={400}
+            className="relative z-10 w-full object-cover "
             priority
           />
           <motion.div
@@ -143,7 +143,7 @@ export function HeroSection() {
               delay:0.3
             }}
           
-            className="absolute top-0 right-0 rotate-12 z-50 bg-yellow-400   rounded-full hidden md:flex flex-col items-center 
+            className="absolute top-10 left-5 rotate-12 z-50 bg-yellow-400   rounded-full hidden md:flex flex-col items-center 
           justify-center  w-16 h-16 md:h-20 md:w-20 lg:h-32 lg:w-32 text-[12px] shadow-card2"
           >
             <Image

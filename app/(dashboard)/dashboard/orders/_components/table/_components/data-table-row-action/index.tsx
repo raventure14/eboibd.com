@@ -61,11 +61,6 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
           >
             Mark as Delever
           </DropdownMenuItem>
-          <DropdownMenuItem
-            onClick={() => updateOrderStatus(order.id, "CANCELD")}
-          >
-            Mark as Cancelled
-          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </>

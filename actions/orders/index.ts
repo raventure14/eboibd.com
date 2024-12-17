@@ -83,8 +83,6 @@ export async function onGetOrders({
           },
         },
       },
-      take: limit,
-      skip: skip,
     });
 
     if (!orders || orders.length <= 0)

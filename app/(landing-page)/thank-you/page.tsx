@@ -5,7 +5,7 @@ import { CheckCircle, Mail, Download } from "lucide-react";
 
 export default function ThankYou() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-primary/5 to-primary/10 flex items-center justify-center p-4">
+    <div className="h-auto pt-20 md:pt-0 min-h-screen bg-gradient-to-b from-primary/5 to-primary/10 flex items-center justify-center p-4">
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -18,7 +18,7 @@ export default function ThankYou() {
           transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
           className="flex justify-center"
         >
-          <CheckCircle className="w-24 h-24 text-green-500" />
+          <CheckCircle className="w-16 h-1/6 md:w-24 md:h-24 text-green-500" />
         </motion.div>
 
         <motion.div 
@@ -27,8 +27,8 @@ export default function ThankYou() {
           transition={{ delay: 0.4 }}
           className="text-center space-y-4"
         >
-          <h1 className="text-4xl font-bold text-gray-900">Thank You for Your Purchase!</h1>
-          <p className="text-xl text-gray-600">Your e-book order has been successfully processed.</p>
+          <h1 className="text-xl md:text-4xl font-bold text-gray-900">Thank You for Your Purchase!</h1>
+          <p className="text-lg md:text-xl text-gray-600">Your e-book order has been successfully processed.</p>
         </motion.div>
 
         <motion.div 
@@ -53,7 +53,7 @@ export default function ThankYou() {
           transition={{ delay: 0.8 }}
           className="text-center text-sm text-gray-500"
         >
-          <p>Having trouble? Contact our support team at support@example.com</p>
+          <p>Having trouble? Contact our support team at hello.eboibd@gmail.com</p>
         </motion.div>
 
         <motion.div 
@@ -71,6 +71,7 @@ export default function ThankYou() {
             Return to Homepage
           </motion.button>
         </motion.div>
+
       </motion.div>
     </div>
   );

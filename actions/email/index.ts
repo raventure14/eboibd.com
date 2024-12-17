@@ -24,7 +24,7 @@ export async function onGenerateDownloadLink(bookId: string, bookName:string) {
     .setProtectedHeader({ alg: "HS256" })
     .setJti(nanoid())
     .setIssuedAt()
-    .setExpirationTime("30m") // Set to expire in 30 minutes
+    .setExpirationTime("525960m") // Set to expire in 1 year
     .sign(SECRET_KEY);
 
   const downloadLink = `${process.env.NEXT_PUBLIC_APP_URL}/api/download/${token}`;
@@ -44,12 +44,13 @@ export async function onSendPurchaseEmail({
     // Read the PDF file
     const pdfPath = path.join(process.cwd(), "public", "ebook.pdf");
     const pdfContent = await fs.readFile(pdfPath);
+    const imgUrl = `${process.env.NEXT_PUBLIC_APP_URL}//book.webp`;
 
     const { data, error } = await resend.emails.send({
       from: "eboibd <noreply@eboibd.com>",
       to: [customerEmail],
       subject: "Your E-book Purchase Confirmation",
-      react: ConfirmedEmail({ customerName, bookTitle, downloadLink }),
+      react: ConfirmedEmail({ customerName, bookTitle, downloadLink, imgUrl }),
       attachments: [
         {
           filename: `${bookTitle}.pdf`,

@@ -1,27 +1,34 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { DataTable } from "./_components/table/data-table";
 import { columns } from "./_components/table/columns";
 import { onGetOrders } from "@/actions/orders";
 import { Order } from "@/types";
 import OrderTableSkeleton from "./_components/order-skeleton";
+import { getPaginationRowModel } from "@tanstack/react-table";
 
 export default function OrdersPage() {
-
-  const { data: orders, refetch, isPending } = useQuery({
-    queryKey: ["orders"],
+  const [pagination, setPagination] = useState({
+    pageIndex: 0, // Starts from page 0
+    pageSize: 10, // Default rows per page
+  });
+  // Fetch orders with pagination data
+  const {
+    data: orders,
+    refetch,
+    isPending,
+  } = useQuery({
+    queryKey: ["orders", pagination.pageIndex, pagination.pageSize],
     queryFn: async () => {
-      const params = new URLSearchParams();
-      // if (customerFilter) params.append("customer", customerFilter);
-      // if (statusFilter) params.append("status", statusFilter);
-      // if (dateFilter) params.append("date", dateFilter.toISOString());
+      const res = await onGetOrders({
+        currentPage: pagination.pageIndex + 1, // Convert to 1-based index
+        limit: pagination.pageSize,
+      });
 
-      const res = await onGetOrders({});
-      const orders = res.orders;
-      if (orders) {
-        const transformedData: Order[] = orders.map((item) => ({
+      if (res && res.orders) {
+        const transformedData: Order[] = res.orders.map((item) => ({
           id: item.id,
           customerName: item.customerName,
           customerEmail: item.customerEmail,
@@ -37,19 +44,23 @@ export default function OrdersPage() {
         }));
         return transformedData;
       }
-      if (res.status === 404) return null;
+      return [];
     },
   });
 
+
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 w-[calc(100vw-256px)] mxau overflow-hidden">
       <div className="flex justify-between items-center">
         <h2 className="text-3xl font-bold tracking-tight">Orders</h2>
       </div>
-      {isPending && (
-        <OrderTableSkeleton/>
+      {isPending && <OrderTableSkeleton />}
+      {orders && (
+        <DataTable
+          columns={columns}
+          data={orders}
+        />
       )}
-      {orders && <DataTable columns={columns} data={orders} />}
     </div>
   );
 }

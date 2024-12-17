@@ -14,10 +14,23 @@ export type CheckoutPayload = {
     bookId: string;
     paymentMethod:PaymentMethod;
     userAgreement:boolean;
-    orderStatus:PaymentStatus
 }
 export const onCheckout = async( data:CheckoutPayload) => {
 try {
+
+    const isPaymentExist = await prismaDB.order.findFirst({
+        where:{
+            transactionId:data.transactionId
+        }
+    })
+
+    if(isPaymentExist) {
+        return {
+            status:400,
+            message:"Please make the payment first."
+        }
+    }
+
     const newCheckout = await prismaDB.order.create({
         data
     })
