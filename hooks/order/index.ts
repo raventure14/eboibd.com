@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-import { Order, PaymentStatus } from "@prisma/client";
+import {  PaymentStatus } from "@prisma/client";
 import { sendOrderConfirmationEmail } from "@/lib/email";
-import { onGetOrderById, onUpdateOrderStatus } from "@/actions/orders";
+import {  onUpdateOrderStatus } from "@/actions/orders";
 import { EmailPayload, onSendPurchaseEmail } from "@/actions/email";
 import { toast} from "react-hot-toast"
 export function useOrderActions() {

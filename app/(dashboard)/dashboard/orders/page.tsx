@@ -1,31 +1,23 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { DataTable } from "./_components/table/data-table";
 import { columns } from "./_components/table/columns";
 import { onGetOrders } from "@/actions/orders";
 import { Order } from "@/types";
 import OrderTableSkeleton from "./_components/order-skeleton";
-import { getPaginationRowModel } from "@tanstack/react-table";
 
 export default function OrdersPage() {
-  const [pagination, setPagination] = useState({
-    pageIndex: 0, // Starts from page 0
-    pageSize: 10, // Default rows per page
-  });
+
   // Fetch orders with pagination data
   const {
     data: orders,
     refetch,
     isPending,
   } = useQuery({
-    queryKey: ["orders", pagination.pageIndex, pagination.pageSize],
+    queryKey: ["orders"],
     queryFn: async () => {
-      const res = await onGetOrders({
-        currentPage: pagination.pageIndex + 1, // Convert to 1-based index
-        limit: pagination.pageSize,
-      });
+      const res = await onGetOrders({});
 
       if (res && res.orders) {
         const transformedData: Order[] = res.orders.map((item) => ({

@@ -11,7 +11,6 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   const { data: session } = useSession();
-  console.log("Session: ", session)
   if(!session) return (
     <div className="h-screen w-full flex justify-center items-center"><Loader className="animate-spin h-20 w-20" /></div>
   )
