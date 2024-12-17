@@ -17,6 +17,7 @@ export default function OrdersPage() {
   } = useQuery({
     queryKey: ["orders"],
     queryFn: async () => {
+
       const res = await onGetOrders({});
 
       if (res && res.orders) {
@@ -40,7 +41,6 @@ export default function OrdersPage() {
     },
   });
 
-
   return (
     <div className="space-y-6 w-[calc(100vw-256px)] mxau overflow-hidden">
       <div className="flex justify-between items-center">
@@ -53,6 +53,7 @@ export default function OrdersPage() {
           data={orders}
         />
       )}
+
     </div>
   );
 }

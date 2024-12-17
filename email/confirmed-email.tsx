@@ -8,6 +8,7 @@ import {
     Preview,
     Text,
     Img
+
   } from '@react-email/components';
   import * as React from 'react';
   
@@ -16,6 +17,7 @@ import {
     bookTitle: string;
     downloadLink: string;
     imgUrl:string;
+
   }
   
   export const ConfirmedEmail = ({
@@ -27,6 +29,7 @@ import {
     <Html>
       <Head />
       <Preview>Your e-book purchase confirmation 🥳</Preview>
+
       <Body style={main}>
         <Container style={container}>
           <Heading style={h1}>Thank you for your purchase!</Heading>
@@ -41,6 +44,7 @@ import {
           </Text>
           {/* <Img src={imgUrl} width={200}
           height={400}  /> */}
+
           <Link href={downloadLink} style={button}>
             Download Your E-book
           </Link>
@@ -53,6 +57,7 @@ import {
           <Text style={text}>
             Best regards,<br />
             Your eboibd team.
+
           </Text>
         </Container>
       </Body>

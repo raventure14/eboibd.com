@@ -24,6 +24,7 @@ export const columns: ColumnDef<Order>[] = [
     ),
   },
   {
+
     accessorKey: "customerEmail",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Customer Email" />

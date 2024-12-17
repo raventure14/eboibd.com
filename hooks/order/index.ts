@@ -6,6 +6,7 @@ import {  onUpdateOrderStatus } from "@/actions/orders";
 import { EmailPayload, onSendPurchaseEmail } from "@/actions/email";
 import { toast} from "react-hot-toast"
 
+
 export function useOrderActions() {
   const [isUpdating, setIsUpdating] = useState(false);
   const [loadingText, setLoadingText] = useState("")
@@ -33,6 +34,7 @@ export function useOrderActions() {
       toast.success("Order status updated successfully")
 
 
+
       if (emailPayload) {
         setLoadingText("Sending email...")
         const emailResponse = await onSendPurchaseEmail(emailPayload);
@@ -40,10 +42,9 @@ export function useOrderActions() {
           toast.error("Something went wrong. Please send the email manually.")
         }else{
           setLoadingText("E-book has been delivered successfully!")
-
-          toast.success("E-book has been delivered successfully!")
         }
         toast.success("E-book has been delivered successfully!")
+
       }
     } catch (error) {
       toast.error("Failed to update order status")
