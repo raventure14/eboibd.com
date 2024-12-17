@@ -35,6 +35,7 @@ export function useOrderActions() {
       if (emailPayload) {
         setLoadingText("Sending email...")
         const emailResponse = await onSendPurchaseEmail(emailPayload);
+        console.log(emailResponse)
         if(emailResponse.status !== 200) {
           toast.error("Something went wrong. Please send the email manually.")
         }else{
@@ -43,8 +44,8 @@ export function useOrderActions() {
         }
       }
     } catch (error) {
-      toast.error("Failed to update order status")
       console.error("Failed to update order status:", error);
+      toast.error("Failed to update order status")
     } finally {
       setIsUpdating(false);
     }

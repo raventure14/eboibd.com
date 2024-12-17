@@ -69,7 +69,6 @@ export async function onGetOrders({
   currentPage?: number;
 }) {
   try {
-    const skip = (currentPage - 1) * limit;
     const orders = await prismaDB.order.findMany({
       orderBy: {
         createdAt: "desc",
@@ -83,8 +82,6 @@ export async function onGetOrders({
           },
         },
       },
-      take: limit,
-      skip: skip,
     });
 
     if (!orders || orders.length <= 0)

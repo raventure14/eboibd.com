@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Loader } from "lucide-react";
-import toast from "react-hot-toast";
+import {toast} from "react-hot-toast";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -30,7 +30,7 @@ export default function LoginPage() {
         return;
       }
       toast.success("Login successfully.")
-      router.push("/dashboard");
+      router.replace("/dashboard");
     } catch (error) {
       setError("An error occurred");
     } finally {
