@@ -12,10 +12,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Book, Order } from "@prisma/client";
 import { z } from "zod";
 import { CheckoutPayload, onCheckout, PaymentMethod } from "@/actions/checkout";
-import { toast } from "sonner";
-import { Variable } from "lucide-react";
-import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 type CheckoutFormReturn = {
   register: UseFormReturn["register"];
@@ -62,23 +60,25 @@ export const useCheckoutForm = (bookData: BookData) => {
           transactionId: data.transactionId,
           paymentMethod: data.paymentMethod as PaymentMethod,
           userAgreement: data.userAgreement,
-          orderStatus:"CONFIRMED"
         };
-        const checkout = await onCheckout(checkoutPayload);
+        const checkoutResponse = await onCheckout(checkoutPayload);
+        if (checkoutResponse?.status !== 201) {
+          // toast.error(checkoutResponse?.message!)
+          throw new Error(checkoutResponse?.message!);
+        }
 
-        return checkout;
+        return checkoutResponse;
       }
       return null;
     },
     onSuccess: () => {
-
+      toast.success("You checkout has been completed successfully.");
       router.replace("/thank-you");
+      reset();
     },
-    onError: () => {
-      toast.error("Something went wrong");
+    onError: (error) => {
+      toast.error(error.message);
     },
-    onMutate: () => reset(),
-   
   });
 
   const onInvalid = (errors: FieldErrors<FieldValues>) => {
@@ -86,7 +86,7 @@ export const useCheckoutForm = (bookData: BookData) => {
   };
 
   const onHandleChekcout = handleSubmit(async (values) => {
-    await mutate(values);
+    mutate(values);
   }, onInvalid);
 
   return {

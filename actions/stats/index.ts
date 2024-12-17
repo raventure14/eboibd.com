@@ -20,6 +20,7 @@ export const getDashboardStats = async () => {
       prismaDB.order.count({
         where: {
           orderStatus: "PENDING",
+          paymentStatus:"PENDING"
         },
       }),
       prismaDB.order.count({

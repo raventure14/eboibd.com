@@ -61,7 +61,7 @@ const BillingCard = ({ register, errors }: Props) => {
         </div>
         <div className="space-y-2">
           <Label htmlFor="customerPhone" className="text-heading text-lg">
-            Phone
+            Phone <span className="text-red-500">*</span>
           </Label>
           <Input
             id="customerPhone"

@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import Image from "next/image";
 import Link from "next/link";
+import { Logo } from "../ui/logo";
 
 export default function Footer() {
   return (
@@ -12,10 +13,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {/* Left Column */}
           <div className=" grid grid-cols-2 items-start md:grid-cols-1">
-            <div className="flex items-center gap-2">
-              <BookOpen className="w-8 h-8 text-[#00C49A]" />
-              <span className="text-xl font-medium text-heading">E-Boi</span>
-            </div>
+            <Logo className="h-16 origin-top object-contain drop-shadow-2xl" />
 
             <div className="space-y-1">
               <h3 className="font-medium text-lg text-heading">Address:</h3>
@@ -66,7 +64,7 @@ export default function Footer() {
                   d="M20.56 3.34a1 1 0 0 0-1-.08l-17 8a1 1 0 0 0-.57.92 1 1 0 0 0 .6.9L8 15.45v6.72L13.84 18l4.76 2.08a.93.93 0 0 0 .4.09 1 1 0 0 0 .52-.15 1 1 0 0 0 .48-.86V4a1 1 0 0 0-.44-.66z"
                 />
               </svg>
-              <span>contact@raventure.com</span>
+              <span> hello.eboibd@gmail.com </span>
             </div>
 
             <form className="space-y-4">
@@ -97,10 +95,10 @@ export default function Footer() {
             E-Boi, a brainchild of RA Venture, is dedicated to making books accessible to everyone, anytime and anywhere. Our goal is to ensure that people from all walks of life can easily access knowledge. We publish ebooks in Bangla across various niches, focusing on adding value to readers' lives`}
             </p>
             <div className="flex gap-8">
-              <a href="#" className="text-para hover:text-gray-900">
+              <a href="/privacy-policy" className="text-para hover:text-gray-900">
                 Privicy Policy
               </a>
-              <a href="#" className="text-para hover:text-gray-900">
+              <a href="/terms-and-conditions" className="text-para hover:text-gray-900">
                 Terms & Conditions
               </a>
             </div>

@@ -8,8 +8,10 @@ export const checkoutFormSchema = z.object({
     .string()
     .email('Invalid email format')
     .min(1, 'Customer email is required'),
-  customerPhone: z
-    .string().optional(), // Optional with phone format validation
+  customerPhone: z.string().regex(
+    /^(\+8801|01)[3-9]\d{8}$/,
+    "Invalid phone number. Must be in the format +8801XXXXXXXXX or 01XXXXXXXXX."
+  ), // Optional with phone format validation
   bkshPhoneNumber: z.string().regex(
     /^(\+8801|01)[3-9]\d{8}$/,
     "Invalid phone number. Must be in the format +8801XXXXXXXXX or 01XXXXXXXXX."

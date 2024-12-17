@@ -10,8 +10,24 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { onCreateClick } from "@/actions/dayly-clicks";
 
 export default function PricingSection() {
+    const router = useRouter()
+  
+  const handleOnClick = async () =>{
+      router.replace("/checkout/chat-gpt-ai-prompt-book")
+      const date = new Date()
+      const newClick = await onCreateClick({
+        day:date.getDay(),
+        month:date.getMonth(),
+        year:date.getFullYear(),
+        totalClicks:1,
+      })
+      console.log(newClick)
+    }
   return (
     <section className=" flex justify-center items-center relative overflow-hidden">
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#51e2de40_1px,transparent_1px),linear-gradient(to_bottom,#51e2de40_1px,transparent_1px)] bg-[size:20px_24px] z-10" />
@@ -112,6 +128,7 @@ export default function PricingSection() {
                     ৳.৬০০{" "}
                   </motion.s>
                 </CardTitle>
+
                 <motion.p
                   initial={{ opacity: 0 }}
                   whileInView={{
@@ -138,8 +155,8 @@ export default function PricingSection() {
                     ease: "anticipate",
                     delay: 0.9,
                   }}
-                >
-                  <Button className="w-full py-6 text-lg font-medium bg-[#10B981] hover:bg-[#059669] transition-colors">
+                > 
+                    <Button className="w-full py-6 text-lg font-medium bg-[#10B981] hover:bg-[#059669] transition-colors" onClick={handleOnClick} >
                     এখনই কিনুন এবং শেখা শুরু করুন
                   </Button>
                 </motion.div>

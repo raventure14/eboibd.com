@@ -90,8 +90,8 @@ export function FeaturesSection() {
             className="w-full lg:w-5/12 flex justify-center"
           >
             <BookPreview
-              src="/features/book.webp"
-              alt="How to use chat gpt in a write way"
+              src="/book.webp"
+              alt="Artificial intelligence, chatGPT and prompt mastry"
             />
           </motion.div>
         </div>
