@@ -5,6 +5,7 @@ import { sendOrderConfirmationEmail } from "@/lib/email";
 import {  onUpdateOrderStatus } from "@/actions/orders";
 import { EmailPayload, onSendPurchaseEmail } from "@/actions/email";
 import { toast} from "react-hot-toast"
+
 export function useOrderActions() {
   const [isUpdating, setIsUpdating] = useState(false);
   const [loadingText, setLoadingText] = useState("")
@@ -25,6 +26,7 @@ export function useOrderActions() {
         orderStatus: status,
       });
       setLoadingText("Order status updated successfully")
+      toast.success("Order status updated successfully")
       if (updateResponse.status !== 200) {
         return toast.error(updateResponse.message);
       }
@@ -39,6 +41,7 @@ export function useOrderActions() {
         }else{
           setLoadingText("E-book has been delivered successfully!")
 
+          toast.success("E-book has been delivered successfully!")
         }
         toast.success("E-book has been delivered successfully!")
       }
