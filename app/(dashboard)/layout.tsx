@@ -11,14 +11,17 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   const { data: session } = useSession();
-  if(!session) return (
-    <div className="h-screen w-full flex justify-center items-center"><Loader className="animate-spin h-20 w-20" /></div>
-  )
+  if (!session)
+    return (
+      <div className="h-screen w-full flex justify-center items-center">
+        <Loader className="animate-spin h-20 w-20" />
+      </div>
+    );
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="max-h-screen bg-gray-100 overflow-y-scroll">
       <Header user={session?.user!} />
       <div className="flex ">
-        <Sidebar />
+        <Sidebar className="min-h-screen" />
         <main className="flex-1 p-6">{children}</main>
       </div>
     </div>
