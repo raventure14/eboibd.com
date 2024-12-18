@@ -38,10 +38,10 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div className="space-y-4 max-h-[calc(100vh-200px)] border-2 border-red-500 ">
+    <div className="space-y-4">
       <DataTableToolbar table={table} />
-      <div className="rounded-md border max-h-full">
-        <Table className="overflow-y-scroll" >
+      <div className="rounded-md border">
+        <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
@@ -60,7 +60,7 @@ export function DataTable<TData, TValue>({
               </TableRow>
             ))}
           </TableHeader>
-          <TableBody className="overflow-y-scroll" >
+          <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
@@ -81,7 +81,8 @@ export function DataTable<TData, TValue>({
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
-                  className="h-24 text-center"
+                  className="h-16 text-center"
+
                 >
                   No results.
                 </TableCell>

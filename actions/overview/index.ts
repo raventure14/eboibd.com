@@ -14,15 +14,14 @@ export const getDashboardOverview = async () => {
         createdAt: "asc",
       },
     });
-
     const dailyRevinue = orders.reduce((acc: any[], order: any) => {
       const date = format(startOfDay(order.createdAt), "MMM dd");
       const existing = acc.find((item) => item.date === date);
 
       if (existing) {
-        existing.revenue += order.payment.amout;
+        existing.revenue += order.amount;
       } else {
-        acc.push({ date, revenue: order.payment.amount });
+        acc.push({ date, revenue: order.amount });
       }
 
       return acc;

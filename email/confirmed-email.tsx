@@ -14,16 +14,20 @@ import {
     customerName: string;
     bookTitle: string;
     downloadLink: string;
+    imgUrl:string;
+
   }
   
   export const ConfirmedEmail = ({
     customerName = 'Valued Customer',
     bookTitle = 'Our Amazing E-book',
     downloadLink = '#',
+    imgUrl
   }: ConfirmedProps) => (
     <Html>
       <Head />
-      <Preview>Your e-book purchase confirmation</Preview>
+      <Preview>Your e-book purchase confirmation 🥳</Preview>
+
       <Body style={main}>
         <Container style={container}>
           <Heading style={h1}>Thank you for your purchase!</Heading>
@@ -34,8 +38,11 @@ import {
           {`  We're excited to confirm that your purchase of "${bookTitle}" has been successful. Your e-book is attached to this email as a PDF file.`}
           </Text>
           <Text style={text}>
-            You can also download your e-book using the link below. Please note that this link will expire in 30 minutes:
+            You can also download your e-book 📑 using the link below 👇.
           </Text>
+          {/* <Img src={imgUrl} width={200}
+          height={400}  /> */}
+
           <Link href={downloadLink} style={button}>
             Download Your E-book
           </Link>
@@ -47,7 +54,8 @@ import {
           </Text>
           <Text style={text}>
             Best regards,<br />
-            Your E-book Store Team
+            Your eboibd team.
+
           </Text>
         </Container>
       </Body>

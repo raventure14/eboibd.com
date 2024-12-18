@@ -34,6 +34,7 @@ import {
             <Select
               value={`${table.getState().pagination.pageSize}`}
               onValueChange={(value) => {
+                console.log("parpage: ", value)
                 table.setPageSize(Number(value))
               }}
             >
@@ -57,7 +58,7 @@ import {
             <Button
               variant="outline"
               className="hidden h-8 w-8 p-0 lg:flex"
-              onClick={() => table.setPageIndex(0)}
+              onClick={() => table.nextPage()}
               disabled={!table.getCanPreviousPage()}
             >
               <span className="sr-only">Go to first page</span>

@@ -9,18 +9,19 @@ import OrderTableSkeleton from "./_components/order-skeleton";
 
 export default function OrdersPage() {
 
-  const { data: orders, refetch, isLoading } = useQuery({
+  // Fetch orders with pagination data
+  const {
+    data: orders,
+    refetch,
+    isLoading,
+  } = useQuery({
     queryKey: ["orders"],
     queryFn: async () => {
-      const params = new URLSearchParams();
-      // if (customerFilter) params.append("customer", customerFilter);
-      // if (statusFilter) params.append("status", statusFilter);
-      // if (dateFilter) params.append("date", dateFilter.toISOString());
 
       const res = await onGetOrders({});
-      const orders = res.orders;
-      if (orders) {
-        const transformedData: Order[] = orders.map((item) => ({
+
+      if (res && res.orders) {
+        const transformedData: Order[] = res.orders.map((item) => ({
           id: item.id,
           customerName: item.customerName,
           customerEmail: item.customerEmail,
