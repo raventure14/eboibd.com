@@ -22,5 +22,5 @@ export async function middleware(req: NextRequest) {
   return NextResponse.next();
 }
 export const config = {
-  matcher: ["/dashboard/:path*", "/auth/login",  '/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)'],
+  matcher: [ "/((?!api/ebooks/download|api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)","/dashboard/:path*", "/auth/login",  ],
 };
