@@ -18,7 +18,6 @@ import {
 } from "@/components/ui/table";
 import { DataTableToolbar } from "./_components/data-table-footer";
 import { DataTablePagination } from "./_components/data-table-pagination";
-import { Order } from "@/types";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -39,10 +38,10 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 max-h-[calc(100vh-200px)] border-2 border-red-500 ">
       <DataTableToolbar table={table} />
-      <div className="rounded-md border">
-        <Table>
+      <div className="rounded-md border max-h-full">
+        <Table className="overflow-y-scroll" >
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
@@ -61,7 +60,7 @@ export function DataTable<TData, TValue>({
               </TableRow>
             ))}
           </TableHeader>
-          <TableBody>
+          <TableBody className="overflow-y-scroll" >
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow

@@ -23,8 +23,8 @@ export function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <div className="hidden md:flex md:flex-col md:w-64 md:bg-white md:border-r">
-      <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
+    <div className="hidden max-h-[calc(100vh-90px)] md:flex md:flex-col md:w-64 md:bg-white md:border-r">
+      <div className="flex-1 flex flex-col pt-5 pb-4 ">
         <nav className="mt-5 flex-1 px-2 space-y-1">
           {navigation.map((item) => {
             const Icon = item.icon;

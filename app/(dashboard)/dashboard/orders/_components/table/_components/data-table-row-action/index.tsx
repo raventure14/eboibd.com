@@ -29,7 +29,7 @@ const loadingStates = [
   },
 ];
 export function DataTableRowActions({ row }: DataTableRowActionsProps) {
-  const { updateOrderStatus, isUpdating, loadingText } =
+  const { updateOrderStatus, isUpdating, loadingText,  } =
     useOrderActions();
   const order = row.original;
 
@@ -60,11 +60,6 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
             }
           >
             Mark as Delever
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            onClick={() => updateOrderStatus(order.id, "CANCELD")}
-          >
-            Mark as Cancelled
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

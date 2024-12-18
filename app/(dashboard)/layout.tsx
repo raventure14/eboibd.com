@@ -12,11 +12,11 @@ export default function DashboardLayout({
   const { data: session } = useSession();
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="max-h-(calc-90px) bg-gray-100 overflow-hidden ">
       <Header user={session?.user} />
-      <div className="flex h-[calc(100vh-4rem)]">
+      <div className="flex ">
         <Sidebar />
-        <main className="flex-1 overflow-y-auto p-6">{children}</main>
+        <main className="flex-1 max-h-full overflow-y-hidden p-6">{children}</main>
       </div>
     </div>
   );
