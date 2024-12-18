@@ -1,8 +1,8 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaClient } from "@prisma/client";
-import NextAuth from "next-auth/next";
 import bcrypt from "bcryptjs"
+import { prismaDB } from "@/lib/prismal";
 
 const prisma = new PrismaClient();
 
@@ -45,9 +45,20 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {
-      if (session?.user) {
-        (session.user as any).role = token.role;
+      const user = await prismaDB.user.findUnique({
+        where: { email: token.email as string },
+      });
+
+      if (user) {
+        session.user = {
+          ...session.user,
+          name: user.name, // Updated name
+          email: user.email,
+          role: user.role,
+          // Include any other fields you want in the session
+        };
       }
+
       return session;
     },
   },

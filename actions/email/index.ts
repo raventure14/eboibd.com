@@ -1,83 +1,37 @@
 "use server";
-
-import { SignJWT } from "jose";
-import { nanoid } from "nanoid";
-import fs from "fs/promises";
-import path from "path";
 import { resend } from "@/lib/resend";
 import ConfirmedEmail from "@/email/confirmed-email";
-import { revalidatePath } from "next/cache";
-
+import { supabase } from "@/lib/supabase-client";
 const SECRET_KEY = new TextEncoder().encode(
   process.env.JWT_SECRET_KEY || "fallback-secret-key"
 );
+import { JWK, SignJWT } from "jose"
 
 export type EmailPayload = {
   customerEmail: string;
   customerName: string;
   bookTitle: string;
   bookId: string;
-  bookName:string
+  bookName: string;
 };
-export async function onGenerateDownloadLink(bookId: string, bookName:string) {
-  const token = await new SignJWT({ bookId, bookName })
-    .setProtectedHeader({ alg: "HS256" })
-    .setJti(nanoid())
-    .setIssuedAt()
-    .setExpirationTime("525960m") // Set to expire in 1 year
-    .sign(SECRET_KEY);
+export async function onGenerateDownloadLink(bucketName:string,filePath:string,) {
+ 
 
-  const downloadLink = `${process.env.NEXT_PUBLIC_APP_URL}/api/download/${token}`;
-  return downloadLink;
+  const { data, error } = await supabase.storage
+    .from(bucketName) // Replace 'ebooks' with your bucket name
+    .createSignedUrl(filePath, 60 * 60 * 12 * 365, {download:true}); // The URL will expire in 1 hour (3600 seconds)
+
+  if (error) {
+    console.log("linkError: ", error)
+    throw new Error(error.message);
+  }
+  if (data.signedUrl) {
+    console.log("download url: ", data.signedUrl)
+    return data.signedUrl;
+  }
+  return null;
 }
-// export async function onSendPurchaseEmail({
-//   customerEmail,
-//   customerName,
-//   bookTitle,
-//   bookId,
-//   bookName
-// }:EmailPayload) {
-//   try {
-//     // Generate download link
-//     const downloadLink = await onGenerateDownloadLink(bookId, bookName );
 
-//     // Read the PDF file
-//     const pdfPath = path.join(process.cwd(), "public", "ebook.pdf");
-//     const pdfContent = await fs.readFile(pdfPath);
-
-//     const imgUrl = `${process.env.NEXT_PUBLIC_APP_URL}//book.webp`;
-//     const { data, error } = await resend.emails.send({
-//       from: "eboibd <noreply@eboibd.com>",
-//       to: [customerEmail],
-//       subject: "Your E-book Purchase Confirmation",
-//       react: ConfirmedEmail({ customerName, bookTitle, downloadLink, imgUrl }),
-//       attachments: [
-//         {
-//           filename: `${bookTitle}.pdf`,
-//           content: pdfContent,
-//         },
-//       ],
-//     });
-
-//     if (error) {
-//       console.error("onSendPurchaseEmail-Error: ", error);
-//       return {
-//         status: 400,
-//         message: "Failed to send email",
-//         downloadLink: null,
-//       };
-//     }
-
-//     return { status: 200, message: "Email sent successfully", downloadLink };
-//   } catch (error) {
-//     console.error("onSendPurchaseEmail-Error:", error);
-//     return {
-//       status: 500,
-//       message: "Something went wrong",
-//       downloadLink: null,
-//     };
-//   }
-// }
 
 export async function onSendPurchaseEmail({
   customerEmail,
@@ -87,19 +41,20 @@ export async function onSendPurchaseEmail({
   bookName,
 }: EmailPayload) {
   try {
-    // Generate the download link
-    const downloadLink = await onGenerateDownloadLink(bookId, bookName);
 
-    // Serve the PDF via URL instead of file system
-    const pdfUrl = `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/ebook.pdf`;
+    const tokenPayload = {
+      bookId,
+      bookName,
+      customerName
+    }
 
-    // Fetch the PDF content using Axios or Fetch API
-    const pdfContent = await fetch(pdfUrl)
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch the PDF file.");
-        return res.arrayBuffer();
-      })
-      .then((buffer) => Buffer.from(buffer));
+    const currentDate = new Date()
+    const expireDate = new Date()
+    expireDate.setFullYear(currentDate.getFullYear()+1, currentDate.getMonth(), currentDate.getDate())
+    
+    const token =await new SignJWT(tokenPayload).setProtectedHeader({alg:"HS256"}).setExpirationTime(expireDate).sign(SECRET_KEY)
+
+    const downloadLink = `${process.env.NEXTAUTH_URL || "http://localhost:3000"}/api/ebooks/download/${token}`;
 
     // Construct the image URL
     const imgUrl = `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/book.webp`;
@@ -110,12 +65,6 @@ export async function onSendPurchaseEmail({
       to: [customerEmail],
       subject: "Your E-book Purchase Confirmation",
       react: ConfirmedEmail({ customerName, bookTitle, downloadLink, imgUrl }),
-      attachments: [
-        {
-          filename: `${bookTitle}.pdf`,
-          content: pdfContent.toString("base64"), // Convert to base64 if Resend requires it
-        },
-      ],
     });
 
     if (error) {
@@ -123,16 +72,16 @@ export async function onSendPurchaseEmail({
       return {
         status: 400,
         message: "Failed to send email",
-        downloadLink: null,
+        info:error
       };
     }
 
     return { status: 200, message: "Email sent successfully", downloadLink };
-  } catch (error) {
+  } catch (error:any) {
     console.error("onSendPurchaseEmail-Error:", error);
     return {
       status: 500,
-      message: "Something went wrong",
+      message: error.message,
       downloadLink: null,
     };
   }
