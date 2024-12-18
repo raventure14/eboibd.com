@@ -11,11 +11,18 @@ export async function GET(request: NextRequest, { params }: { params: { token: s
     const bookId = payload.bookId as string
     const bookName = payload.bookName as string
 
-    // In a real application, you would use the bookId to fetch the correct file
-    const filePath = path.join(process.cwd(), 'public', 'ebook.pdf')
-    const fileBuffer = await fs.readFile(filePath)
+    // Serve the PDF via URL instead of file system
+    const pdfUrl = `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/ebook.pdf`;
 
-    return new NextResponse(fileBuffer, {
+    // Fetch the PDF content using Axios or Fetch API
+    const pdfContent = await fetch(pdfUrl)
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch the PDF file.");
+        return res.arrayBuffer();
+      })
+      .then((buffer) => Buffer.from(buffer));
+
+    return new NextResponse(pdfContent, {
       headers: {
         'Content-Disposition': `attachment; filename="${bookName}_${bookId}.pdf"`,
         'Content-Type': 'application/pdf',

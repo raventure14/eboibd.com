@@ -30,22 +30,81 @@ export async function onGenerateDownloadLink(bookId: string, bookName:string) {
   const downloadLink = `${process.env.NEXT_PUBLIC_APP_URL}/api/download/${token}`;
   return downloadLink;
 }
+// export async function onSendPurchaseEmail({
+//   customerEmail,
+//   customerName,
+//   bookTitle,
+//   bookId,
+//   bookName
+// }:EmailPayload) {
+//   try {
+//     // Generate download link
+//     const downloadLink = await onGenerateDownloadLink(bookId, bookName );
+
+//     // Read the PDF file
+//     const pdfPath = path.join(process.cwd(), "public", "ebook.pdf");
+//     const pdfContent = await fs.readFile(pdfPath);
+
+//     const imgUrl = `${process.env.NEXT_PUBLIC_APP_URL}//book.webp`;
+//     const { data, error } = await resend.emails.send({
+//       from: "eboibd <noreply@eboibd.com>",
+//       to: [customerEmail],
+//       subject: "Your E-book Purchase Confirmation",
+//       react: ConfirmedEmail({ customerName, bookTitle, downloadLink, imgUrl }),
+//       attachments: [
+//         {
+//           filename: `${bookTitle}.pdf`,
+//           content: pdfContent,
+//         },
+//       ],
+//     });
+
+//     if (error) {
+//       console.error("onSendPurchaseEmail-Error: ", error);
+//       return {
+//         status: 400,
+//         message: "Failed to send email",
+//         downloadLink: null,
+//       };
+//     }
+
+//     return { status: 200, message: "Email sent successfully", downloadLink };
+//   } catch (error) {
+//     console.error("onSendPurchaseEmail-Error:", error);
+//     return {
+//       status: 500,
+//       message: "Something went wrong",
+//       downloadLink: null,
+//     };
+//   }
+// }
+
 export async function onSendPurchaseEmail({
   customerEmail,
   customerName,
   bookTitle,
   bookId,
-  bookName
-}:EmailPayload) {
+  bookName,
+}: EmailPayload) {
   try {
-    // Generate download link
-    const downloadLink = await onGenerateDownloadLink(bookId, bookName );
+    // Generate the download link
+    const downloadLink = await onGenerateDownloadLink(bookId, bookName);
 
-    // Read the PDF file
-    const pdfPath = path.join(process.cwd(), "public", "ebook.pdf");
-    const pdfContent = await fs.readFile(pdfPath);
+    // Serve the PDF via URL instead of file system
+    const pdfUrl = `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/ebook.pdf`;
 
-    const imgUrl = `${process.env.NEXT_PUBLIC_APP_URL}//book.webp`;
+    // Fetch the PDF content using Axios or Fetch API
+    const pdfContent = await fetch(pdfUrl)
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch the PDF file.");
+        return res.arrayBuffer();
+      })
+      .then((buffer) => Buffer.from(buffer));
+
+    // Construct the image URL
+    const imgUrl = `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/book.webp`;
+
+    // Send the email with Resend
     const { data, error } = await resend.emails.send({
       from: "eboibd <noreply@eboibd.com>",
       to: [customerEmail],
@@ -54,7 +113,7 @@ export async function onSendPurchaseEmail({
       attachments: [
         {
           filename: `${bookTitle}.pdf`,
-          content: pdfContent,
+          content: pdfContent.toString("base64"), // Convert to base64 if Resend requires it
         },
       ],
     });
