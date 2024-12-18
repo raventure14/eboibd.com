@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 import {  PaymentStatus } from "@prisma/client";
 import { sendOrderConfirmationEmail } from "@/lib/email";
 import {  onUpdateOrderStatus } from "@/actions/orders";
@@ -32,6 +31,7 @@ export function useOrderActions() {
         return toast.error(updateResponse.message + " ✨ ");
       }
 
+      toast.success("Order status updated successfully")
 
       if (emailPayload) {
         setLoadingText("Sending email...")
