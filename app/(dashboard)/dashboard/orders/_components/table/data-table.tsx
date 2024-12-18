@@ -18,7 +18,6 @@ import {
 } from "@/components/ui/table";
 import { DataTableToolbar } from "./_components/data-table-footer";
 import { DataTablePagination } from "./_components/data-table-pagination";
-import { Order } from "@/types";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -83,7 +82,6 @@ export function DataTable<TData, TValue>({
                 <TableCell
                   colSpan={columns.length}
                   className="h-16 text-center"
-
                 >
                   No results.
                 </TableCell>

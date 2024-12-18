@@ -1,5 +1,4 @@
 import { useState } from "react";
-
 import {  PaymentStatus } from "@prisma/client";
 import { sendOrderConfirmationEmail } from "@/lib/email";
 import {  onUpdateOrderStatus } from "@/actions/orders";
@@ -29,11 +28,10 @@ export function useOrderActions() {
       setLoadingText("Order status updated successfully")
       toast.success("Order status updated successfully")
       if (updateResponse.status !== 200) {
-        return toast.error(updateResponse.message);
+        return toast.error(updateResponse.message + " ✨ ");
       }
+
       toast.success("Order status updated successfully")
-
-
 
       if (emailPayload) {
         setLoadingText("Sending email...")
@@ -54,28 +52,10 @@ export function useOrderActions() {
     }
   };
 
-  const updatePaymentStatus = async (
-    orderId: string,
-    status: PaymentStatus
-  ) => {
-    setIsUpdating(true);
-    try {
-      // Update payment status logic here
-      console.log(`Updating payment status for order ${orderId} to ${status}`);
-
-      if (status === "CONFIRMED") {
-        await sendOrderConfirmationEmail(orderId);
-      }
-    } catch (error) {
-      console.error("Failed to update payment status:", error);
-    } finally {
-      setIsUpdating(false);
-    }
-  };
+  
 
   return {
     updateOrderStatus,
-    updatePaymentStatus,
     isUpdating,
     loadingText,
   };

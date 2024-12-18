@@ -69,7 +69,6 @@ export async function onGetOrders({
   currentPage?: number;
 }) {
   try {
-    const skip = (currentPage - 1) * limit;
     const orders = await prismaDB.order.findMany({
       orderBy: {
         createdAt: "desc",
@@ -114,6 +113,13 @@ export async function onUpdateOrderStatus({
   orderStatus: PaymentStatus;
 }) {
   try {
+    if(!orderId || !paymentStatus || !orderStatus){
+      return {
+        status:400, 
+        message:"Something went wrong"
+      }
+    }
+    console.log("onUpdatePayload: ", {orderId, paymentStatus, orderStatus})
     const order = await prismaDB.order.update({
       where: {
         id: orderId,
@@ -130,7 +136,6 @@ export async function onUpdateOrderStatus({
         message: "Something went wrong, please try again later.",
       };
     }
-    revalidatePath("/dashboard/orders")
     return {
       status: 200,
       message: "Order status updated successfully.",

@@ -8,6 +8,7 @@ import { Toaster } from "react-hot-toast"
 
 
 
+
 export const metadata: Metadata = {
   title: "EboiBD | Bangladesi best e-book selling website",
   description:
