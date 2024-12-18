@@ -8,7 +8,7 @@ import { RecentOrders } from "./_components/recent-orders";
 
 export default function DashboardPage() {
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 w-[calc(100vw-335px)]">
       <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
       <DashboardStats />
       <div className="grid gap-6 md:grid-cols-2">

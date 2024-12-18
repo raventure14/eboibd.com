@@ -10,6 +10,7 @@ import {
   Settings,
   Users,
 } from "lucide-react";
+import { Logo } from "@/components/ui/logo";
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
@@ -23,9 +24,10 @@ export function Sidebar({className}:{className?:string}) {
   const pathname = usePathname();
 
   return (
-    <div className={cn("hidden h-full md:flex md:flex-col md:w-64 md:bg-white md:border-r", className)}>
+    <div className={cn(" flex-col md:w-64 md:bg-white md:border-r fixed top-0 left-0 right-0 z-50 flex h-16 items-start justify-between border-b bg-background px-4 ", className)}>
+       <Logo className="h-16 py-2" />
       <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
-        <nav className="mt-5 flex-1 px-2 space-y-1">
+        <nav className="mt-5 flex-1  space-y-1">
           {navigation.map((item) => {
             const Icon = item.icon;
             return (

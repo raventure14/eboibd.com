@@ -18,11 +18,11 @@ export default function DashboardLayout({
       </div>
     );
   return (
-    <div className="max-h-screen bg-gray-100 overflow-y-scroll">
+    <div className="min-h-screen bg-gray-100">
       <Header user={session?.user!} />
-      <div className="flex ">
-        <Sidebar className="min-h-screen" />
-        <main className="flex-1 p-6">{children}</main>
+      <Sidebar className="min-h-screen z-40" />
+      <div className="w-full  flex justify-end ">
+        <main className="w-full flex justify-end z-20  p-6">{children}</main>
       </div>
     </div>
   );

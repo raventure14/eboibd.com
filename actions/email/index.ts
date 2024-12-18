@@ -68,7 +68,6 @@ export async function onSendPurchaseEmail({
       };
     }
 
-    revalidatePath("/dashboard/orders")
     return { status: 200, message: "Email sent successfully", downloadLink };
   } catch (error) {
     console.error("onSendPurchaseEmail-Error:", error);
