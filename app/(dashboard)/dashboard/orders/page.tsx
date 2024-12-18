@@ -13,11 +13,10 @@ export default function OrdersPage() {
   const {
     data: orders,
     refetch,
-    isLoading,
+    isPending,
   } = useQuery({
     queryKey: ["orders"],
     queryFn: async () => {
-
       const res = await onGetOrders({});
 
       if (res && res.orders) {
@@ -37,19 +36,23 @@ export default function OrdersPage() {
         }));
         return transformedData;
       }
-      if (res.status !== 200) return undefined;
+      return [];
     },
   });
 
+
   return (
-    <div className="space-y-6 max-h-full ">
+    <div className="space-y-6 w-[calc(100vw-256px)] mxau overflow-hidden">
       <div className="flex justify-between items-center">
         <h2 className="text-3xl font-bold tracking-tight">Orders</h2>
       </div>
-      {isLoading && (
-        <OrderTableSkeleton/>
+      {isPending && <OrderTableSkeleton />}
+      {orders && (
+        <DataTable
+          columns={columns}
+          data={orders}
+        />
       )}
-      {orders && <DataTable columns={columns} data={orders}  />}
     </div>
   );
 }
