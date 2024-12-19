@@ -8,6 +8,7 @@ import { Loader, X } from "lucide-react";
 import Link from "next/link";
 import { Book } from "@prisma/client";
 import { onGetBook } from "@/actions/book";
+import { onCreateClick } from "@/actions/dayly-clicks";
 
 const Cart = () => {
   const { isOpen, setIsOpen } = useCart((state) => state);
@@ -29,8 +30,19 @@ const Cart = () => {
         setLoading(false);
       }
     }
-    getBook()
-  },[]);
+    getBook();
+  }, []);
+
+  const navigateToCheckout = async () => {
+    setIsOpen();
+    const date = new Date();
+     await onCreateClick({
+      day: date.getDay(),
+      month: date.getMonth(),
+      year: date.getFullYear(),
+      totalClicks: 1,
+    });
+  };
 
   return (
     <motion.div
@@ -83,7 +95,9 @@ const Cart = () => {
                   <span className="text-highlight text-base font-semibold">
                     TK.{book.offerPrice}
                   </span>
-                  <s className="text-para text-base font-semibold">TK.{book.actualPrice}</s>
+                  <s className="text-para text-base font-semibold">
+                    TK.{book.actualPrice}
+                  </s>
                 </div>
               </div>
             </div>
@@ -91,7 +105,7 @@ const Cart = () => {
 
           <Link
             href={`/checkout/${book.slug}`}
-            onClick={() =>setIsOpen()}
+            onClick={navigateToCheckout}
             className=" w-full mx-auto bg-cta/90 hover:bg-cta/100 text-white px-6 sm:px-8 py-3  g rounded-sm transition-colors z-20 text-center text-base md:text-lg lg:text-xl "
           >
             Checkout

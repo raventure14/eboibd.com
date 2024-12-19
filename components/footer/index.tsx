@@ -38,8 +38,8 @@ export default function Footer() {
                 <Image
                   height={50}
                   width={50}
-                  src={"/icons/instagram.svg"}
-                  alt="Facebook Icon"
+                  src={"/icons/instagram.png"}
+                  alt="Instagram Icon"
                 />
               </a>
               <a href="#">

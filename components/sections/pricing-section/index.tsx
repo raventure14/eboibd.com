@@ -10,7 +10,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { onCreateClick } from "@/actions/dayly-clicks";
 
@@ -18,7 +17,7 @@ export default function PricingSection() {
     const router = useRouter()
   
   const handleOnClick = async () =>{
-      router.replace("/checkout/chat-gpt-ai-prompt-book")
+      router.replace("/checkout/artificial-intelligence-chatgpt-prompt-engineering-কি-কেন-কিভাবে")
       const date = new Date()
       const newClick = await onCreateClick({
         day:date.getDay(),
