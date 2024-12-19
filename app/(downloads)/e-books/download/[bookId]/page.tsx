@@ -53,10 +53,7 @@ export default function DownloadPage() {
       try {
         // verify the token
         if (token) {
-          const verifiedToken = await axios.get(`/api/ebooks/download/verify`, {
-            params: {
-              token,
-            },
+          const verifiedToken = await axios.get(`/api/ebooks/download/${token}/verify`, {
           });
 
           if (verifiedToken.data.status !== 200) {

@@ -2,10 +2,9 @@ import { verifyToken } from "@/lib/utils";
 import { NextRequest, NextResponse } from "next/server";
 
 
-export async function GET(request:NextRequest) {
+export async function GET(request:NextRequest, {params}:{params:{token:string}}) {
     try {
-        const { searchParams } = new URL(request.url)
-        const token  = searchParams.get("token")
+        const token  =params.token
         if(token){
 
             const verifiedToken = await verifyToken(token)
@@ -26,10 +25,13 @@ export async function GET(request:NextRequest) {
                 message:"Token can not be empty"
             })
         }
-    } catch (error) {
+    } catch (error:any) {
+        console.log("VefifyDownload-Error: ", error)
+
         return NextResponse.json({
             status:500,
-            message:"Something went wrong."
+            message:"Something went wrong.",
+            info: error.message
         })
     }
     
