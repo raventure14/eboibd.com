@@ -40,6 +40,7 @@ export default function Footer() {
                   width={50}
                   src={"/icons/instagram.png"}
                   alt="Instagram Icon"
+                  className="h-[50px] w-[50px]"
                 />
               </a>
               <a href="#">
