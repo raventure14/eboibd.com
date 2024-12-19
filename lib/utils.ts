@@ -52,12 +52,8 @@ export async function verifyToken(token: string): Promise<TokenPayload | false> 
       throw new Error("Token is not provided!");
     }
 
-    console.log("SecretKey: ", SECRET_KEY);
-    console.log("Token: ", token);
-
     // Verify the token
     const payload =await jwt.verify(token, SECRET_KEY) ;
-    console.log("Payload: ", payload)
     // Validate the required properties in the payload
     if (
       typeof payload === "object" &&
@@ -65,7 +61,6 @@ export async function verifyToken(token: string): Promise<TokenPayload | false> 
       payload.bookName &&
       payload.customerName
     ) {
-      console.log("Verified Token Payload: ", payload);
       return {
         bookId: payload.bookId,
         bookName: payload.bookName,

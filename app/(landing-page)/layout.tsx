@@ -9,11 +9,8 @@ import MobileNav from '@/components/navigation/mobile-nav';
 
 
 export const metadata: Metadata = {
-  title: 'RA Venture 1',
-  description: 'RA Venture best e-book selling plafrorm',
-  icons:{
-    icon:"/favicon.ico"
-  }
+  title: 'E-boi is best e-book selling platform in Bangladesh',
+  description: 'e-boi is  best e-book selling plafrorm',
 };
 
 export default function LandingPageLayout({

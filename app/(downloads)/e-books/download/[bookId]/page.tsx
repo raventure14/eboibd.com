@@ -6,7 +6,14 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { toast } from "react-hot-toast";
-import { Download, BookOpen, Coffee, Share2, CheckCircle, Loader } from "lucide-react";
+import {
+  Download,
+  BookOpen,
+  Coffee,
+  Share2,
+  CheckCircle,
+  Loader,
+} from "lucide-react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { UnauthorizedAccess } from "@/components/global/unauthorize-card";
 import { verifyToken } from "@/lib/utils";
@@ -24,7 +31,6 @@ export default function DownloadPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
-  const params = useParams();
 
   const [isDownloading, setIsDownloading] = useState(false);
   const [isDownloaded, setIsDownloaded] = useState(false);
@@ -103,9 +109,8 @@ export default function DownloadPage() {
       setIsDownloaded(true);
     }
   };
-  console.log(!isNotAuthorized, !isLoading);
   return (
-    <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white py-12 px-4 sm:px-6 lg:px-8 flex justify-center items-center">
+    <div className="min-h-screen bg-gradient-to-b from-purple-50 to-white py-12 px-4 sm:px-6 lg:px-8 flex justify-center items-center z-50">
       {isLoading && <DownloadLoadingCard step={loadingStep} />}
       {isNotAuthorized && <UnauthorizedAccess />}
       {!isNotAuthorized && bookData && (
@@ -120,7 +125,7 @@ export default function DownloadPage() {
             </span>{" "}
             is just a click away!
           </p>
-          <div className="w-full flex justify-between items-start gap-3">
+          <div className="w-full flex flex-col md:flex-row justify-between items-start gap-3">
             <Card className="p-8 mb-12">
               <div className="flex flex-col items-center">
                 <Image

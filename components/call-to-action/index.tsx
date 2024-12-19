@@ -57,7 +57,7 @@ const CallToAction = ({
 
           <span className="text-white "> 71% +</span> */}
            <Image
-              src={"/discount.webp"}
+              src={"/discount.png"}
               alt="Discount upto 71%+"
               height={70}
               width={70}
