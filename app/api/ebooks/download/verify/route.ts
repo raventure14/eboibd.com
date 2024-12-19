@@ -4,7 +4,8 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request:NextRequest) {
     try {
-        const token  = request.nextUrl.searchParams.get("token")
+        const { searchParams } = new URL(request.url, request.nextUrl)
+        const token  = searchParams.get("token")
         if(token){
 
             const verifiedToken = await verifyToken(token)
