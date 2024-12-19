@@ -2,7 +2,7 @@ import { PaymentStatus } from "@prisma/client";
 
 export type PaymentMethod = 'bkash' | 'nagad';
 
-export interface Order {
+export interface  Order {
   id: string;
   customerName: string;
   customerEmail: string;
@@ -14,7 +14,10 @@ export interface Order {
   paymentMethod: PaymentMethod;
   userAgreement: boolean;
   createdAt: Date;
-  bookName:string
+  bookName:string,
+  bookId:string;
+  slug:string;
+  bookImage:string;
 }
 export interface OrderResponse {
   id: string;
@@ -29,7 +32,7 @@ export interface OrderResponse {
   userAgreement: boolean;
   createdAt: Date;
   book:{
-    id: string; name: string; slug: string;
+    id: string; name: string; slug: string; folderName:string; fileName:string;
   }
 }
 export interface SkeletonProps {

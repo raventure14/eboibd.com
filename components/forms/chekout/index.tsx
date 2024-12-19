@@ -46,7 +46,7 @@ const CheckoutForm =  () => {
         {/* Order Summary Card */}
         <OrderSummaryCard
           bookName={book?.name!}
-          coverImage="/features/book.webp"
+          coverImage={book?.image!}
           imgAlt={book?.name!}
           price={book?.offerPrice!}
         />

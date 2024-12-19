@@ -79,6 +79,9 @@ export async function onGetOrders({
             name: true,
             id: true,
             slug: true,
+            image:true,
+            folderName:true,
+            fileName:true
           },
         },
       },

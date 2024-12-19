@@ -5,7 +5,6 @@ import { NextRequest, NextResponse } from "next/server";
 export async function middleware(req: NextRequest) {
   // Extract token from the request
   const token = await getToken({ req });
-  console.log("Token: ", token)
   const url = req.nextUrl;
 
   // Redirect authenticated users away from the auth pages

@@ -6,6 +6,7 @@ const SECRET_KEY = new TextEncoder().encode(
   process.env.JWT_SECRET_KEY || "fallback-secret-key"
 );
 import { JWK, SignJWT } from "jose"
+import { generateToken } from "@/lib/utils";
 
 export type EmailPayload = {
   customerEmail: string;
@@ -13,6 +14,8 @@ export type EmailPayload = {
   bookTitle: string;
   bookId: string;
   bookName: string;
+  slug:string;
+  bookImage:string;
 };
 export async function onGenerateDownloadLink(bucketName:string,filePath:string,) {
  
@@ -39,22 +42,23 @@ export async function onSendPurchaseEmail({
   bookTitle,
   bookId,
   bookName,
+  slug,
+  bookImage
 }: EmailPayload) {
   try {
 
     const tokenPayload = {
       bookId,
       bookName,
-      customerName
+      customerName,
+      slug,
+      bookImage
     }
-
-    const currentDate = new Date()
-    const expireDate = new Date()
-    expireDate.setFullYear(currentDate.getFullYear()+1, currentDate.getMonth(), currentDate.getDate())
     
-    const token =await new SignJWT(tokenPayload).setProtectedHeader({alg:"HS256"}).setExpirationTime(expireDate).sign(SECRET_KEY)
 
-    const downloadLink = `${process.env.NEXTAUTH_URL || "http://localhost:3000"}/api/ebooks/download/${token}`;
+    const token = await generateToken(tokenPayload)
+
+    const downloadLink = `${process.env.NEXTAUTH_URL || "http://localhost:3000"}/e-books/download/[${bookId}]?token=${token}`;
 
     // Construct the image URL
     const imgUrl = `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/book.webp`;

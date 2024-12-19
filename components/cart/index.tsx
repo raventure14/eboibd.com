@@ -19,6 +19,7 @@ const Cart = () => {
       try {
         setLoading(true);
         const response = await onGetBook();
+
         if (response.book) {
           setBook(response.book);
         }
@@ -37,7 +38,7 @@ const Cart = () => {
       whileInView={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.2, ease: "easeInOut" }}
       className={cn(
-        "h-[calc(100vh-1.3rem)] md:h-[calc(100vh-5.5rem)]  fixed bottom-0 w-full md:w-80 right-0 bg-white bg-opacity-8 overflow-hidden z-50 shadow-card2 rounded-t-sm rounded-l-sm backdrop-blur-xl ",
+        "h-[calc(100vh-1.3rem)] md:h-[calc(100vh-5.5rem)]  fixed bottom-0 w-full md:w-72 right-0 bg-white bg-opacity-8 overflow-hidden z-50 shadow-card2 rounded-t-sm rounded-l-sm backdrop-blur-xl ",
         isOpen ? "flex flex-col" : "hidden"
       )}
     >
@@ -57,20 +58,20 @@ const Cart = () => {
         </div>
       )}
       {!loading && book && (
-        <div className="h-full flex flex-col justify-between pb-2">
+        <div className="h-full flex flex-col items-start justify-between pb-2">
           <div className="px-1">
-            <div className="w-full flex justify-between items-center gap-1 px-2 py-4 border rounded-sm mt-4">
+            <div className="w-full flex justify-between items-start gap-1 px-2 py-4 border rounded-sm mt-4">
               <div className=" flex justify-center items-center border rounded-sm p-1 shadow-md ">
                 <Image
-                  src={"/features/book.webp"}
+                  src={book.image}
                   alt={book.name}
                   height={1000}
                   width={1000}
-                  className="w-28 object-cover rounded-sm"
+                  className="h-auto object-cover rounded-sm"
                 />
               </div>
               <div className=" flex flex-col justify-start items-start h-full">
-                <h2 className="text-heading px-4  font-semibold text-sm text-left">
+                <h2 className="text-heading px-4  font-semibold text-xs text-left">
                   {book.name}
                 </h2>
                 <div className="flex justify-start items-center gap-2 px-4">

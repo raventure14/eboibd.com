@@ -33,6 +33,9 @@ export default function OrdersPage() {
           userAgreement: item.userAgreement,
           createdAt: item.createdAt,
           transactionId: item.transactionId,
+          bookId:item.book.id,
+          slug:item.book.slug,
+          bookImage:item.book.image
         }));
         return transformedData;
       }
