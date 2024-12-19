@@ -58,7 +58,7 @@ export async function onSendPurchaseEmail({
 
     const token = await generateToken(tokenPayload)
 
-    const downloadLink = `${process.env.NEXTAUTH_URL || "http://localhost:3000"}/e-books/download/[${bookId}]?token=${token}`;
+    const downloadLink = `${process.env.NEXTAUTH_URL || "http://localhost:3000"}/e-books/download/${bookId}?token=${token}`;
 
     // Construct the image URL
     const imgUrl = `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/book.webp`;
