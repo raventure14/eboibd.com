@@ -25,7 +25,7 @@ export default function Footer() {
 
 
 
-            <div className="flex justify-center gap-4">
+            <div className="flex justify-start gap-4">
               <Link href="#">
                 <Image
                   height={50}
