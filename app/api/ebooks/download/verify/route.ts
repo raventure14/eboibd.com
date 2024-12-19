@@ -26,10 +26,13 @@ export async function GET(request:NextRequest) {
                 message:"Token can not be empty"
             })
         }
-    } catch (error) {
+    } catch (error:any) {
+        console.log("VefifyDownload-Error: ", error)
+
         return NextResponse.json({
             status:500,
-            message:"Something went wrong."
+            message:"Something went wrong.",
+            info: error.message
         })
     }
     
