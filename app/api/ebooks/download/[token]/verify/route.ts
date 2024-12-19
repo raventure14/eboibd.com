@@ -2,10 +2,9 @@ import { verifyToken } from "@/lib/utils";
 import { NextRequest, NextResponse } from "next/server";
 
 
-export async function GET(request:NextRequest) {
+export async function GET(request:NextRequest, {params}:{params:{token:string}}) {
     try {
-        const { searchParams } = new URL(request.url, request.nextUrl)
-        const token  = searchParams.get("token")
+        const token  =params.token
         if(token){
 
             const verifiedToken = await verifyToken(token)
