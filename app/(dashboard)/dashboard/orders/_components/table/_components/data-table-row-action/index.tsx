@@ -10,24 +10,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Order } from "@/types";
 import { useOrderActions } from "@/hooks/order";
-import { MultiStepLoader } from "@/components/ui/multi-step-loader";
 import LoadingCard from "@/components/global/loading-card";
-import { toast } from "sonner";
 
 interface DataTableRowActionsProps {
   row: Row<Order>;
 }
-const loadingStates = [
-  {
-    text: "Updating Order Status",
-  },
-  {
-    text: "Updating Payment Status",
-  },
-  {
-    text: "Sending Email",
-  },
-];
 export function DataTableRowActions({ row }: DataTableRowActionsProps) {
   const { updateOrderStatus, isUpdating, loadingText,  } =
     useOrderActions();
@@ -54,8 +41,10 @@ export function DataTableRowActions({ row }: DataTableRowActionsProps) {
                 customerEmail: order.customerEmail,
                 customerName: order.customerName,
                 bookTitle: order.bookName,
-                bookId: order.id,
+                bookId: order.bookId,
                 bookName: order.bookName,
+                slug:order.slug,
+                bookImage:order.bookImage
               })
             }
           >

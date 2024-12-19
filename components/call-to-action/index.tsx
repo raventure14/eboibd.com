@@ -27,7 +27,7 @@ const CallToAction = ({
   const router = useRouter()
 
   const handleOnClick = async () =>{
-    router.replace("/checkout/chat-gpt-ai-prompt-book")
+    router.replace("/checkout/artificial-intelligence-chatgpt-prompt-engineering-কি-কেন-কিভাবে")
     const date = new Date()
     const newClick = await onCreateClick({
       day:date.getDay(),
@@ -57,7 +57,7 @@ const CallToAction = ({
 
           <span className="text-white "> 71% +</span> */}
            <Image
-              src={"/discount.webp"}
+              src={"/discount.png"}
               alt="Discount upto 71%+"
               height={70}
               width={70}

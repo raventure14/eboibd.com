@@ -81,6 +81,7 @@ const PaymentCard = ({
           <p className="text-base text-para font-semibold">
             03. Enter below bKash Account Number
           </p>
+          <p className="text-base text-para font-semibold"> <strong>01306844711</strong> </p>
           <p className="text-base text-para font-semibold">
             04. Enter <span className="font-medium">total amount</span>
           </p>
@@ -92,18 +93,22 @@ const PaymentCard = ({
             that Transaction ID below
           </p>
           <p className="text-highlight font-semibold">
-            You need to send us ₮ {amount}.00
+            You need to send us BDT {amount}.00 Onlly
           </p>
         </div>
 
         <div className="space-y-2">
           <div>
             <span className="text-heading text-lg">Account Type: </span>
-            <span className="font-medium text-para text-base ">Personal</span>
+            <span className="font-medium text-para text-base ">
+              <strong>Personal</strong>
+            </span>
           </div>
           <div>
             <span className="text-heading text-lg">Account Number: </span>
-            <span className="font-medium text-para text-base">01777136724</span>
+            <span className="font-medium text-para text-base">
+              <strong>01306844711</strong>
+            </span>
           </div>
         </div>
 
@@ -152,7 +157,10 @@ const PaymentCard = ({
           Your personal data will be used to process your order, support your
           experience throughout this website, and for other purposes described
           in our{" "}
-          <Link href="/privacy-policy" className="text-blue-600 hover:underline">
+          <Link
+            href="/privacy-policy"
+            className="text-blue-600 hover:underline"
+          >
             privacy policy
           </Link>
           .
@@ -166,7 +174,12 @@ const PaymentCard = ({
           />
           <Label htmlFor="userAgreement" className="text-lg text-heading">
             I have read and agree to the website{" "}
-            <Link href={"/terms-and-conditions"} className="text-blue-600 hover:underline" >terms and conditions</Link>{" "}
+            <Link
+              href={"/terms-and-conditions"}
+              className="text-blue-600 hover:underline"
+            >
+              terms and conditions
+            </Link>{" "}
             <span className="text-red-500">*</span>
           </Label>
         </div>

@@ -68,6 +68,9 @@ model Book {
   slug        String
   actualPrice Int
   offerPrice  Int
+  image       String
+  folderName  String
+  fileName    String
   order       Order[]
 
   createdAt DateTime @default(now())

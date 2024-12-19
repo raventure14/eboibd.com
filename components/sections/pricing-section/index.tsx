@@ -10,7 +10,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { onCreateClick } from "@/actions/dayly-clicks";
 
@@ -18,7 +17,7 @@ export default function PricingSection() {
     const router = useRouter()
   
   const handleOnClick = async () =>{
-      router.replace("/checkout/chat-gpt-ai-prompt-book")
+      router.replace("/checkout/artificial-intelligence-chatgpt-prompt-engineering-কি-কেন-কিভাবে")
       const date = new Date()
       const newClick = await onCreateClick({
         day:date.getDay(),
@@ -128,21 +127,6 @@ export default function PricingSection() {
                     ৳.৬০০{" "}
                   </motion.s>
                 </CardTitle>
-
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  whileInView={{
-                    opacity: 1,
-                  }}
-                  transition={{
-                    duration: 0.6,
-                    ease: "anticipate",
-                    delay: 0.8,
-                  }}
-                  className="text-gray-600"
-                >
-                  একবার পেমেন্ট, আজীবন অ্যাক্সেস
-                </motion.p>
               </CardHeader>
               <CardContent className="space-y-6 pt-6">
                 <motion.div
@@ -161,23 +145,6 @@ export default function PricingSection() {
                   </Button>
                 </motion.div>
 
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  whileInView={{
-                    opacity: 1,
-                  }}
-                  transition={{
-                    duration: 0.6,
-                    ease: "anticipate",
-                    delay: 1,
-                  }}
-                  className=" w-full flex justify-center space-y-4 text-center"
-                >
-                  <div className="flex items-center gap-3">
-                    <ArrowLeftIcon className="w-6 h-6 text-[#7C3AED]" />
-                    <span className="text-gray-600">ফ্রি লাইফটাইম এক্সেস </span>
-                  </div>
-                </motion.div>
               </CardContent>
               <CardFooter className="p-0">
                 <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-r from-green-200 via-purple-200 to-pink-200 opacity-30 blur-3xl -z-10" />

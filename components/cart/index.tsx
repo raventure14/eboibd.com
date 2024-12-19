@@ -8,6 +8,7 @@ import { Loader, X } from "lucide-react";
 import Link from "next/link";
 import { Book } from "@prisma/client";
 import { onGetBook } from "@/actions/book";
+import { onCreateClick } from "@/actions/dayly-clicks";
 
 const Cart = () => {
   const { isOpen, setIsOpen } = useCart((state) => state);
@@ -19,6 +20,7 @@ const Cart = () => {
       try {
         setLoading(true);
         const response = await onGetBook();
+
         if (response.book) {
           setBook(response.book);
         }
@@ -28,8 +30,19 @@ const Cart = () => {
         setLoading(false);
       }
     }
-    getBook()
-  },[]);
+    getBook();
+  }, []);
+
+  const navigateToCheckout = async () => {
+    setIsOpen();
+    const date = new Date();
+     await onCreateClick({
+      day: date.getDay(),
+      month: date.getMonth(),
+      year: date.getFullYear(),
+      totalClicks: 1,
+    });
+  };
 
   return (
     <motion.div
@@ -37,7 +50,7 @@ const Cart = () => {
       whileInView={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.2, ease: "easeInOut" }}
       className={cn(
-        "h-[calc(100vh-1.3rem)] md:h-[calc(100vh-5.5rem)]  fixed bottom-0 w-full md:w-80 right-0 bg-white bg-opacity-8 overflow-hidden z-50 shadow-card2 rounded-t-sm rounded-l-sm backdrop-blur-xl ",
+        "h-[calc(100vh-1.3rem)] md:h-[calc(100vh-5.5rem)]  fixed bottom-0 w-full md:w-72 right-0 bg-white bg-opacity-8 overflow-hidden z-50 shadow-card2 rounded-t-sm rounded-l-sm backdrop-blur-xl ",
         isOpen ? "flex flex-col" : "hidden"
       )}
     >
@@ -57,20 +70,20 @@ const Cart = () => {
         </div>
       )}
       {!loading && book && (
-        <div className="h-full flex flex-col justify-between pb-2">
+        <div className="h-full flex flex-col items-start justify-between pb-2">
           <div className="px-1">
-            <div className="w-full flex justify-between items-center gap-1 px-2 py-4 border rounded-sm mt-4">
+            <div className="w-full flex justify-between items-start gap-1 px-2 py-4 border rounded-sm mt-4">
               <div className=" flex justify-center items-center border rounded-sm p-1 shadow-md ">
                 <Image
-                  src={"/features/book.webp"}
+                  src={book.image}
                   alt={book.name}
                   height={1000}
                   width={1000}
-                  className="w-28 object-cover rounded-sm"
+                  className="h-auto object-cover rounded-sm"
                 />
               </div>
               <div className=" flex flex-col justify-start items-start h-full">
-                <h2 className="text-heading px-4  font-semibold text-sm text-left">
+                <h2 className="text-heading px-4  font-semibold text-xs text-left">
                   {book.name}
                 </h2>
                 <div className="flex justify-start items-center gap-2 px-4">
@@ -82,7 +95,9 @@ const Cart = () => {
                   <span className="text-highlight text-base font-semibold">
                     TK.{book.offerPrice}
                   </span>
-                  <s className="text-para text-base font-semibold">TK.{book.actualPrice}</s>
+                  <s className="text-para text-base font-semibold">
+                    TK.{book.actualPrice}
+                  </s>
                 </div>
               </div>
             </div>
@@ -90,7 +105,7 @@ const Cart = () => {
 
           <Link
             href={`/checkout/${book.slug}`}
-            onClick={() =>setIsOpen()}
+            onClick={navigateToCheckout}
             className=" w-full mx-auto bg-cta/90 hover:bg-cta/100 text-white px-6 sm:px-8 py-3  g rounded-sm transition-colors z-20 text-center text-base md:text-lg lg:text-xl "
           >
             Checkout

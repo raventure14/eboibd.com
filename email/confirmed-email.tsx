@@ -33,7 +33,7 @@ import {
             Dear {customerName},
           </Text>
           <Text style={text}>
-          {`  We're excited to confirm that your purchase of "${bookTitle}" has been successful. Your e-book is attached to this email as a PDF file.`}
+          {`  We're excited to confirm that your purchase of "${bookTitle}" has been successful.`}
           </Text>
           <Text style={text}>
             You can also download your e-book 📑 using the link below 👇.

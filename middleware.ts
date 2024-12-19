@@ -5,7 +5,6 @@ import { NextRequest, NextResponse } from "next/server";
 export async function middleware(req: NextRequest) {
   // Extract token from the request
   const token = await getToken({ req });
-  console.log("Token: ", token)
   const url = req.nextUrl;
 
   // Redirect authenticated users away from the auth pages
@@ -22,5 +21,5 @@ export async function middleware(req: NextRequest) {
   return NextResponse.next();
 }
 export const config = {
-  matcher: ["/dashboard/:path*", "/auth/login"],
+  matcher: [ "/((?!api/ebooks/download|api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)","/dashboard/:path*", "/auth/login",  ],
 };

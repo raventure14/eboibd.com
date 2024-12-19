@@ -25,7 +25,7 @@ export default function Footer() {
 
 
 
-            <div className="flex gap-4">
+            <div className="flex justify-center gap-4">
               <Link href="#">
                 <Image
                   height={50}
@@ -38,8 +38,9 @@ export default function Footer() {
                 <Image
                   height={50}
                   width={50}
-                  src={"/icons/instagram.svg"}
-                  alt="Facebook Icon"
+                  src={"/icons/instagram.png"}
+                  alt="Instagram Icon"
+                  className="h-[30px] w-[30px] object-cover rounded-full mt-2"
                 />
               </a>
               <a href="#">
