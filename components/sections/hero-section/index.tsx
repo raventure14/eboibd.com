@@ -23,7 +23,7 @@ export function HeroSection() {
           }}
           className="flex-1 px-10 md:px-0 space-y-6 text-center lg:text-left leading-normal z-20"
         >
-          <h1 className="text-3xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-6xl font-bold text-heading text-balance md:text-nowrap !leading-tight px-2 sm:px-0 ">
+          <h1 className="text-3xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-bold text-heading text-balance md:text-nowrap !leading-tight px-2 sm:px-0 ">
             <motion.span
               initial={{
                 x: -50,
@@ -147,7 +147,7 @@ export function HeroSection() {
           justify-center  w-16 h-16 md:h-20 md:w-20 lg:h-32 lg:w-32 text-[12px] shadow-card2"
           >
             <Image
-              src={"/discount.webp"}
+              src={"/discount.png"}
               alt="Discount upto 71%+"
               height={50}
               width={50}
