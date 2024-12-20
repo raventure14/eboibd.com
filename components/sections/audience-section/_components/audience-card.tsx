@@ -31,7 +31,7 @@ export function AudienceCard({
       }}
       className={cn(
         "bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 origin-center ",
-        "border border-purple-100/20 backdrop-blur-sm max-w-[350px] lg:max-w-[496px]",
+        "border border-purple-100/20 backdrop-blur-sm max-w-[350px] lg:max-w-[410px]",
         className
       )}
     >

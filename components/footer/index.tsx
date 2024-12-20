@@ -5,6 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import Image from "next/image";
 import Link from "next/link";
 import { Logo } from "../ui/logo";
+import ReachUsForm from "../forms/reach-us";
 
 export default function Footer() {
   return (
@@ -68,25 +69,7 @@ export default function Footer() {
               <span> hello.eboibd@gmail.com </span>
             </div>
 
-            <form className="space-y-4">
-              <Input
-                type="email"
-                placeholder="example@gmail.com"
-                className="bg-[#E5E5E5] border-0"
-              />
-              <Input
-                type="text"
-                placeholder="your phone number(optional)"
-                className="bg-[#E5E5E5] border-0"
-              />
-              <Textarea
-                placeholder="Write your query"
-                className="bg-[#E5E5E5] border-0 min-h-[120px]"
-              />
-              <Button className="bg-[#00C49A] hover:bg-[#00B389] text-white px-8">
-                submit
-              </Button>
-            </form>
+            <ReachUsForm />
           </div>
 
           {/* Right Column */}
