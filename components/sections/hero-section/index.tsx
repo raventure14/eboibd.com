@@ -143,8 +143,8 @@ export function HeroSection() {
               delay:0.3
             }}
           
-            className="absolute top-10 left-5 rotate-12 z-50 bg-yellow-400   rounded-full hidden md:flex flex-col items-center 
-          justify-center  w-16 h-16 md:h-20 md:w-20 lg:h-32 lg:w-32 text-[12px] shadow-card2"
+            className="absolute top-7 left-5 rotate-12 z-50 bg-yellow-400   rounded-full hidden md:flex flex-col items-center 
+          justify-center  w-16 h-16 md:h-20 md:w-20 lg:h-28 lg:w-28 text-[12px] shadow-card2"
           >
             <Image
               src={"/discount.png"}

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { onGetBook } from "@/actions/book";
 import BillingCard from "@/app/(landing-page)/checkout/[bookSlug]/_components/billing-card";
 import OrderSummaryCard from "@/app/(landing-page)/checkout/[bookSlug]/_components/order-summary-card";
@@ -8,56 +8,71 @@ import { Book } from "@prisma/client";
 import { LoaderIcon } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
+const CheckoutForm = () => {
+  const [isMounted, setIsMounted] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [book, setBook] = useState<Book | undefined>(undefined);
 
-const CheckoutForm =  () => {
-  const [isMounted, setIsMounted] = useState<boolean>(false)
-  const [book, setBook] = useState<Book|undefined>(undefined)
-
-  const {register, errors, isPending, onHandleChekcout,setValue } = useCheckoutForm(book)
+  const { register, errors, isPending, onHandleChekcout, setValue } =
+    useCheckoutForm(book);
 
   useEffect(() => {
+    setIsMounted(true);
     async function getBookData() {
       try {
-        
-        const response = await onGetBook()
-        if(response.status === 200){
-          setBook(response.book)
+        setLoading(true);
+        const response = await onGetBook();
+        if (response.status === 200) {
+          setBook(response.book);
         }
-        
-        setIsMounted(true)
+
+        setIsMounted(true);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       } finally {
-        setIsMounted(true)
+        setLoading(false);
       }
     }
-    getBookData()
-  },[])
-
-  if(!isMounted) return (
-    <div className="min-h-[calc(100vh-5rem)] w-full flex justify-center items-center" >
-      <LoaderIcon className="animate-spin h-20 w-20 " />
-    </div>
-  )
+    getBookData();
+  }, []);
+  if(!isMounted) return null
   return (
-    <form className="grid lg:grid-cols-2 gap-6 h-full w-full mx-auto" onSubmit={onHandleChekcout} >
-      {/* Left Column - Order Summary and Billing Details */}
-      <div className="space-y-6 h-auto">
-        {/* Order Summary Card */}
-        <OrderSummaryCard
-          bookName={book?.name!}
-          coverImage={book?.image!}
-          imgAlt={book?.name!}
-          price={book?.offerPrice!}
-        />
+    <>
+      {loading && (
+        <div className="min-h-[calc(100vh-5rem)] w-full flex justify-center items-center">
+          <LoaderIcon className="animate-spin h-20 w-20 " />
+        </div>
+      )}
+      {!loading && (
+        <form
+          className="grid lg:grid-cols-2 gap-6 h-full w-full mx-auto"
+          onSubmit={onHandleChekcout}
+        >
+          {/* Left Column - Order Summary and Billing Details */}
+          <div className="space-y-6 h-auto">
+            {/* Order Summary Card */}
+            <OrderSummaryCard
+              bookName={book?.name!}
+              coverImage={book?.image!}
+              imgAlt={book?.name!}
+              price={book?.offerPrice!}
+            />
 
-        {/* Billing Details Card */}
-        <BillingCard register={register} errors={errors}/>
-      </div>
+            {/* Billing Details Card */}
+            <BillingCard register={register} errors={errors} />
+          </div>
 
-      {/* Right Column - Payment Details */}
-      <PaymentCard register={register} errors={errors} setValue={setValue} loading={isPending} amount={book?.offerPrice!} />
-    </form>
+          {/* Right Column - Payment Details */}
+          <PaymentCard
+            register={register}
+            errors={errors}
+            setValue={setValue}
+            loading={isPending}
+            amount={book?.offerPrice!}
+          />
+        </form>
+      )}
+    </>
   );
 };
 

@@ -22,7 +22,7 @@ export function FeatureCard({ icon, title, className }: FeatureCardProps) {
         duration: 0.2,
         ease: "easeInOut",
       }}
-      className={cn("bg-white rounded-xl p-6 shadow-card2", className)}
+      className={cn("bg-white rounded-xl p-6 shadow-card2 mx-w-[496px] ", className)}
     >
       <motion.div
         initial={{ y: -30, opacity: 0.1 }}
