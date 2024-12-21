@@ -5,14 +5,13 @@ import { prismaDB } from "@/lib/prismal";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { token: string } }
+  { params }: { params: Promise<{ token: string }> }
 ) {
   try {
-    const verifyResponse = await verifyToken(params.token);
+    const token = (await params).token
+    const verifyResponse = await verifyToken(token);
     if (verifyResponse) {
       const bookId = verifyResponse.bookId! || "dumybookid";
-      const bookName = verifyResponse.bookName! || "dummybookname";
-      console.log("VerifiedResponse: ", verifyResponse)
       const book = await prismaDB.book.findFirst({
         where: {
           id: bookId,
@@ -28,18 +27,16 @@ export async function GET(
       // Fetch the PDF content using Axios or Fetch API
       const bucketName = book.folderName
       const fileName = book.fileName
-      console.table([bucketName, fileName])
       const { data, error } = await supabase.storage
         .from(bucketName)
         .download(fileName); 
-      console.log("downloadError: ", error)
-      if (!data) {
+        if (!data) {
+        console.log("downloadError: ", error)
         return NextResponse.json({
           status: 500,
           message: "Something went wrong please try again!",
         });
       }
-      console.log("data: ",data)
       
       return new NextResponse(data, {
         headers: {

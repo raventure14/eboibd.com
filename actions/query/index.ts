@@ -11,12 +11,12 @@ type QueryProps = {
 const supportEmail = process.env.SUPPORT_EMAIL as string;
 export const onSendQueryEmail = async ({email, phone, query}:QueryProps) => {
     try {
-        console.log("supportEmail: ", supportEmail)
+        const emailTemplate = await SupportQueryEmail({email, phone, query})
         const {data,error } = await resend.emails.send({
             from: "eboibd <support@eboibd.com>",
             to:[supportEmail],
             subject:"You have recieved new query form customer",
-            react: SupportQueryEmail({email, phone, query})
+            react: emailTemplate
         })
 
         if(!data) {
