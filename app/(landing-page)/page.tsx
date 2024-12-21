@@ -1,6 +1,7 @@
 import { AudienceSection } from "@/components/sections/audience-section";
 import { ClauseSection } from "@/components/sections/clause-section";
 import { DoYouKnowSection } from "@/components/sections/do-you-know-section";
+import FAQSection from "@/components/sections/faq-section";
 import { FeaturesSection } from "@/components/sections/feature-section";
 import { HeroSection } from "@/components/sections/hero-section";
 import PricingSection from "@/components/sections/pricing-section";
@@ -16,7 +17,7 @@ export default function Home() {
       <DoYouKnowSection />
       <TestimonialsSection />
       <PricingSection />
-      {/* <MotivationalSection /> */}
+      <FAQSection />
     </main>
   );
 }
