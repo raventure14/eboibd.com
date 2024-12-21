@@ -83,7 +83,7 @@ export default function PricingSection() {
                 transition={{
                   duration: 0.4,
                   ease: "anticipate",
-                  delay: 0.8,
+                  delay: 0.2,
                 }}
                 className="bg-cta/20 py-2 px-2 absolute top-2 right-2 rounded-xl"
               >
@@ -105,7 +105,7 @@ export default function PricingSection() {
                     transition={{
                       duration: 0.5,
                       ease: "anticipate",
-                      delay: 0.8,
+                      delay: 0.2,
                     }}
                     className="text-highlight font-bold"
                   >
@@ -120,7 +120,7 @@ export default function PricingSection() {
                     transition={{
                       duration: 0.6,
                       ease: "anticipate",
-                      delay: 0.4,
+                      delay: 0.1,
                     }}
                     className="text-para font-semibold"
                   >
@@ -137,7 +137,7 @@ export default function PricingSection() {
                   transition={{
                     duration: 0.6,
                     ease: "anticipate",
-                    delay: 0.9,
+                    delay: 0.3,
                   }}
                 > 
                     <Button className="w-full py-6 text-lg font-medium bg-[#10B981] hover:bg-[#059669] transition-colors" onClick={handleOnClick} >
