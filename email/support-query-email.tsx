@@ -1,6 +1,5 @@
 import React from 'react';
 import { Html, Head, Body, Container, Section, Text, Hr } from '@react-email/components';
-import { render } from '@react-email/render';
 
 interface SupportQueryEmailProps {
   email: string;
