@@ -39,6 +39,7 @@ export default function FAQSection() {
       >
         <h2 className="text-3xl text-heading font-bold mb-6 text-center"> <span className="text-highlight" >FAQ</span> / সচরাচর জিজ্ঞাসা</h2>
         <div className="space-y-4 max-w-2xl mx-auto">
+
           {faqData.map((item, index) => (
             <FAQItem
               key={index}
