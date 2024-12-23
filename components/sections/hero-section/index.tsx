@@ -123,7 +123,7 @@ export function HeroSection() {
         >
           <div className="bg-[#B4EFE7] rounded-[70%] absolute bottom-0 -z-10 h-[50%] w-full left-0 backdrop-blur-2xl " />
           <Image
-            src="/hero-img.webp"
+            src="/boi2.png"
             alt="Artificial intelligance, chagGPT, and prompt engineering"
             width={400}
             height={400}
@@ -143,14 +143,14 @@ export function HeroSection() {
               delay:0.3
             }}
           
-            className="absolute top-7 left-5 rotate-12 z-50 bg-yellow-400   rounded-full hidden md:flex flex-col items-center 
-          justify-center  w-16 h-16 md:h-20 md:w-20 lg:h-28 lg:w-28 text-[12px] shadow-card2"
+            className="absolute top-6 left-[5.3rem] rotate-12 z-50 bg-yellow-400   rounded-full hidden md:flex flex-col items-center 
+          justify-center  w-12 h-12 md:h-16 md:w-16 lg:h-20 lg:w-20 text-[12px] shadow-card2"
           >
             <Image
               src={"/discount.png"}
               alt="Discount upto 71%+"
-              height={50}
-              width={50}
+              height={40}
+              width={40}
               className="w-full object-cover rounded-full
           "
             />

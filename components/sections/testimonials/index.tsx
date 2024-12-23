@@ -19,7 +19,7 @@ export function TestimonialsSection() {
             <div className="relative h-full w-full max-w-md mx-auto lg:mx-0">
               <div className="absolute inset-0 bg-gradient-to-r from-purple-100 to-blue-100 rounded-full blur-3xl opacity-30" />
               <Image
-                src="/review-illustration.avif"
+                src="/brand/feedback.jpg"
                 alt="Readers Review"
                 width={300}
                 height={300}

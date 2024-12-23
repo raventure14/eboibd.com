@@ -14,9 +14,10 @@ export default function FAQItem({ question, answer, isOpen, onToggle }: FAQItemP
   return (
     <motion.div 
       className="border border-gray-200 rounded-lg overflow-hidden"
-      initial={false}
-      animate={{ backgroundColor: isOpen ? "#f3f4f6" : "#ffffff" }}
-      transition={{ duration: 0.3 }}
+      initial={{opacity:0, y:50}}
+      whileInView={{ backgroundColor: isOpen ? "#f3f4f6" : "#ffffff",opacity:1, y:0 }}
+      transition={{ duration: 0.3, ease:"linear" }}
+
     >
       <button
         className="flex justify-between items-center w-full p-4 text-left"
