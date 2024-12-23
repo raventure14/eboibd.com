@@ -1,41 +1,50 @@
-"use server"
+"use server";
 
-import OrdersPage from "@/app/(dashboard)/dashboard/orders/page";
 import { prismaDB } from "@/lib/prismal";
-import { format, startOfDay, subDays } from "date-fns";
+import { format, startOfDay } from "date-fns";
+
 
 export const getDashboardOverview = async () => {
   try {
-    const orders = await prismaDB.order.findMany({
+    const dailyOverview = await prismaDB.order.groupBy({
+      by: ["createdAt"], // Group by the createdAt field
       where: {
-        orderStatus: "CONFIRMED",
+        orderStatus: "CONFIRMED", // Filter orders by status
       },
-      orderBy: {
-        createdAt: "asc",
+      _sum: {
+        amount: true, // Sum of order amounts
+      },
+      _count: {
+        id: true, // Count of orders
       },
     });
-    const dailyRevinue = orders.reduce((acc: any[], order: any) => {
-      const date = format(startOfDay(order.createdAt), "MMM dd");
-      const existing = acc.find((item) => item.date === date);
-
-      if (existing) {
-        existing.revenue += order.amount;
-      } else {
-        acc.push({ date, revenue: order.amount });
-      }
-
-      return acc;
-    }, []);
+    const dailyRevenue = dailyOverview.reduce(
+      (acc: any[], order: any, index) => {
+        const date = format(startOfDay(order.createdAt), "MMM dd");
+        const existing = acc.find((item) => item.date === date);
+        let count = 1;
+        if (existing) {
+          existing.revenue += order._sum.amount;
+          existing.count = existing.count+1
+         
+        } else {
+          acc.push({ date, revenue: order._sum.amount, count });
+          
+        }
+        return acc;
+      },
+      []
+    );
 
     return {
-        status:200,
-        dailyRevinue
-    }
+      status: 200,
+      dailyRevenue,
+    };
   } catch (error) {
-    console.log("Error-GET-Overview", error)
+    console.error("Error-GET-Overview:", error);
     return {
-        status:500,
-        message:"Something went wrong"
-    }
+      status: 500,
+      message: "Something went wrong",
+    };
   }
 };

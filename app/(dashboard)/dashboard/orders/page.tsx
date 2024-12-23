@@ -45,7 +45,7 @@ export default function OrdersPage() {
 
 
   return (
-    <div className="space-y-6 w-[calc(100vw-335px)]  overflow-hidden z-20 ">
+    <div className="space-y-6 w-full mt-16 lg:mt-0  pb-[4rem] lg:mb-0 lg:w-[calc(100vw-335px)]  overflow-hidden z-20 ">
       <div className="flex justify-between items-center">
         <h2 className="text-3xl font-bold tracking-tight">Orders</h2>
       </div>
