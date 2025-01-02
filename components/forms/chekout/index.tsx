@@ -14,7 +14,7 @@ const CheckoutForm = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [book, setBook] = useState<Book | undefined>(undefined);
 
-  const { register, errors, isPending, onHandleChekcout, setValue } =
+  const { register, errors, isPending, onHandleChekcout, setValue, getValues } =
     useCheckoutForm(book);
 
   useEffect(() => {
@@ -79,6 +79,7 @@ const CheckoutForm = () => {
             register={register}
             errors={errors}
             setValue={setValue}
+            getValues={getValues}
             loading={isPending}
             amount={book?.offerPrice!}
           />
