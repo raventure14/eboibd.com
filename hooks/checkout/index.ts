@@ -32,6 +32,7 @@ export const useCheckoutForm = (bookData: BookData) => {
     reset,
     watch,
     setValue,
+    getValues
   } = useForm({
     defaultValues: {
       customerName: "",
@@ -96,5 +97,6 @@ export const useCheckoutForm = (bookData: BookData) => {
     isPending,
     variables,
     setValue,
+    getValues
   };
 };
