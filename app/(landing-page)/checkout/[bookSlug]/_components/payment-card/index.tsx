@@ -199,7 +199,7 @@ const PaymentCard = ({
           size="lg"
           disabled={loading}
         >
-          {loading ? <Loader className="animate-spin" /> : "Complete Payment"}
+          {loading ? <Loader className="animate-spin text-highlight" /> : "Complete Payment"}
         </Button>
       </div>
     </Card>

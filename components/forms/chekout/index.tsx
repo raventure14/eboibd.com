@@ -1,5 +1,6 @@
 "use client";
 import { onGetBook } from "@/actions/book";
+import { onCreateClick } from "@/actions/dayly-clicks";
 import BillingCard from "@/app/(landing-page)/checkout/[bookSlug]/_components/billing-card";
 import OrderSummaryCard from "@/app/(landing-page)/checkout/[bookSlug]/_components/order-summary-card";
 import PaymentCard from "@/app/(landing-page)/checkout/[bookSlug]/_components/payment-card";
@@ -17,7 +18,17 @@ const CheckoutForm = () => {
     useCheckoutForm(book);
 
   useEffect(() => {
+
     setIsMounted(true);
+    const handleOnCtaClick = async () =>{
+        const date = new Date()
+         await onCreateClick({
+          day:date.getDay(),
+          month:date.getMonth(),
+          year:date.getFullYear(),
+          totalClicks:1,
+        })
+      }
     async function getBookData() {
       try {
         setLoading(true);
@@ -33,6 +44,7 @@ const CheckoutForm = () => {
         setLoading(false);
       }
     }
+    handleOnCtaClick()
     getBookData();
   }, []);
   if(!isMounted) return null
