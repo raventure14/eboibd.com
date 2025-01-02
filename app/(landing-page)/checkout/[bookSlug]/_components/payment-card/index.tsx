@@ -10,24 +10,28 @@ import React, { useState } from "react";
 import {
   FieldErrors,
   FieldValues,
+  UseFormGetValues,
   UseFormRegister,
   UseFormSetValue,
 } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { Loader } from "lucide-react";
 import Link from "next/link";
+
+type FormValues = {
+  customerName: string;
+  customerEmail: string;
+  customerPhone: string;
+  bkshPhoneNumber: string;
+  transactionId: string;
+  paymentMethod: string;
+  userAgreement: boolean;
+}
 type Props = {
   register: UseFormRegister<any>;
   errors: FieldErrors<FieldValues>;
-  setValue: UseFormSetValue<{
-    customerName: string;
-    customerEmail: string;
-    customerPhone: string;
-    bkshPhoneNumber: string;
-    transactionId: string;
-    paymentMethod: string;
-    userAgreement: boolean;
-  }>;
+  setValue: UseFormSetValue<FormValues>;
+  getValues: UseFormGetValues<FormValues>
   loading: boolean;
   amount: number;
 };
@@ -35,11 +39,13 @@ const PaymentCard = ({
   register,
   errors,
   setValue,
+  getValues,
   loading,
   amount,
 }: Props) => {
   const handleUserAgreement = () => {
-    setValue("userAgreement", true);
+    const userAgreement = getValues("userAgreement")
+    setValue("userAgreement", !userAgreement);
   };
   return (
     <Card className="p-6">
