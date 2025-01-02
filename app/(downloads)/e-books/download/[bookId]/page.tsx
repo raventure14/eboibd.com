@@ -79,7 +79,9 @@ export default function DownloadPage() {
 
     // Simulate download process
     try {
-      const response = await axios.get(`/api/ebooks/download/${token}`);
+      const response = await axios.get(`/api/ebooks/download/${token}`, {
+        responseType:"arraybuffer"
+      });
       console.log("Response: ", response);
       if (response.status !== 200) {
         toast.error("Error during download. Please try again.", {
@@ -87,18 +89,18 @@ export default function DownloadPage() {
         });
         return;
       }
-      // saveAs(response.data,"ebook.pdf")
-      const blob = new Blob([response.data], { type: "application/pdf" });
-      console.log("Blog: ", blob);
-      const url = URL.createObjectURL(blob);
       const fileName = bookData?.bookName.split(" ").join("-");
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = `${fileName}.pdf`;
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      URL.revokeObjectURL(url);
+      const blob = new Blob([response.data], { type: "application/pdf" });
+      saveAs(blob,`${fileName}.pdf`)
+      // console.log("Blog: ", blob);
+      // const url = URL.createObjectURL(blob);
+      // const link = document.createElement("a");
+      // link.href = url;
+      // link.download = `${fileName}.pdf`;
+      // document.body.appendChild(link);
+      // link.click();
+      // link.remove();
+      // URL.revokeObjectURL(url);
     } catch (error) {
       console.error("Error downloading eBook:", error);
     } finally {

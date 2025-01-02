@@ -55,7 +55,7 @@ export default function AccountSettings() {
       {!user && (
         <div className="min-h-screen w-full justify-center items-center">
           {" "}
-          <Loader className="animate-spin text-para" />{" "}
+          <Loader className="animate-spin text-highlight" />{" "}
         </div>
       )}
       {user && (

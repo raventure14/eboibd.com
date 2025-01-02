@@ -73,9 +73,7 @@ const CallToAction = ({
         className="w-full relative mx-auto "
       >
         
-        <Button className=" text-sm md:text-base w-[90%] md:w-auto bg-cta/90 hover:bg-cta/100 text-white px-6 sm:px-8 py-5 sm:py-6  sm:text-lg rounded-md transition-colors z-20" onClick={handleOnClick}>
-          <Link href={"/checkout/artificial-intelligence-chatgpt-prompt-engineering-কি-কেন-কিভাবে"} >{ctaText} - মাত্র 169 টাকায়!</Link>
-        </Button>
+          <Link className="text-sm md:text-base w-[90%] md:w-auto bg-cta/90 hover:bg-cta/100 text-white px-6 sm:px-8 py-3 sm:py-3  sm:text-lg rounded-md transition-colors z-20" href={"/checkout/artificial-intelligence-chatgpt-prompt-engineering-কি-কেন-কিভাবে"} >{ctaText} - মাত্র 169 টাকায়!</Link>
       </motion.div>
       {isRating && (
         <motion.div
