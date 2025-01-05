@@ -89,7 +89,7 @@ export function HeroSection() {
               ease: "easeInOut",
               delay: 0.1,
             }}
-            className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto lg:mx-0 text-balance"
+            className=" w-[80%] mx-auto text-xs sm:text-lg text-gray-600 max-w-2xl lg:mx-0 text-balance"
           >
             বইটি পড়ে সহজে AI সম্পর্কে জেনে সফলতার পথে নিজেকে 10X এগিয়ে রাখুন
           </motion.p>
