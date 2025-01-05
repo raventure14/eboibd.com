@@ -31,7 +31,7 @@ export default function PricingSection() {
     <section className=" flex justify-center items-center relative overflow-hidden">
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#51e2de40_1px,transparent_1px),linear-gradient(to_bottom,#51e2de40_1px,transparent_1px)] bg-[size:20px_24px] z-10" />
       <div className="container mx-auto px-4 py-16 md:py-24 z-30">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           {/* Left Column */}
           <div className="space-y-6">
             <motion.h1
@@ -90,7 +90,7 @@ export default function PricingSection() {
                 <p className="text-cta font-semibold italic">save 71%+</p>
               </motion.div>
               <CardHeader className="text-center space-y-2 pb-0 mt-10">
-                <CardTitle className="text-4xl  flex justify-center gap-5">
+                <CardTitle className=" text-xl sm:text-2xl md:text-3xl lg:text-4xl  flex justify-center gap-5">
                   <motion.span
                     initial={{
                       scale: 0,
@@ -140,7 +140,7 @@ export default function PricingSection() {
                     delay: 0.3,
                   }}
                 > 
-                    <Button className="w-full py-6 text-lg font-medium bg-[#10B981] hover:bg-[#059669] transition-colors" onClick={handleOnClick} >
+                    <Button className="w-full py-4 md:py-6 text-xs md:text-lg font-medium bg-[#10B981] hover:bg-[#059669] transition-colors" onClick={handleOnClick} >
                     এখনই কিনুন এবং শেখা শুরু করুন
                   </Button>
                 </motion.div>

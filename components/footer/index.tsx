@@ -26,8 +26,8 @@ export default function Footer() {
 
 
 
-            <div className="flex justify-start gap-4">
-              <Link href="#">
+            <div className="flex  justify-start gap-4">
+              <Link href="https://www.facebook.com/profile.php?id=61570440601996" target="_blank">
                 <Image
                   height={50}
                   width={50}
@@ -35,23 +35,23 @@ export default function Footer() {
                   alt="Facebook Icon"
                 />
               </Link>
-              <a href="#">
+              <Link href="#">
                 <Image
                   height={50}
                   width={50}
                   src={"/icons/instagram.png"}
                   alt="Instagram Icon"
-                  className="h-[30px] w-[30px] object-cover rounded-full mt-2"
+                  className="h-[25px] w-[25px] md:h-[30px] md:w-[30px] object-cover rounded-full mt-2"
                 />
-              </a>
-              <a href="#">
+              </Link>
+              <Link href="#">
                 <Image
                   height={50}
                   width={50}
                   src={"/icons/tiktok.svg"}
                   alt="Facebook Icon"
                 />
-              </a>
+              </Link>
             </div>
           </div>
 
