@@ -70,10 +70,10 @@ const CallToAction = ({
         initial={initial}
         whileInView={whileInview}
         transition={transition}
-        className="w-full relative mx-auto "
+        className="w-full flex justify-center md:justify-start relative mx-auto  "
       >
         
-          <Link className="text-sm md:text-base w-[90%] md:w-auto bg-cta/90 hover:bg-cta/100 text-white px-6 sm:px-8 py-3 sm:py-3  sm:text-lg rounded-md transition-colors z-20" href={"/checkout/artificial-intelligence-chatgpt-prompt-engineering-কি-কেন-কিভাবে"} >{ctaText} - মাত্র 169 টাকায়!</Link>
+          <Link className="text-xs md:text-base w-full md:w-auto bg-cta/90 hover:bg-cta/100 text-white px-6 sm:px-8 py-3 sm:py-3  sm:text-lg rounded-md transition-colors z-20 whitespace-nowrap text-center" href={"/checkout/artificial-intelligence-chatgpt-prompt-engineering-কি-কেন-কিভাবে"} >{ctaText} - মাত্র 169 টাকায়!</Link>
       </motion.div>
       {isRating && (
         <motion.div
