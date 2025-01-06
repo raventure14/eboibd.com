@@ -1,0 +1,33 @@
+{
+  "default_branch": "main",
+  "branches": [
+    "copyright-change",
+    "feature/dashboard/password-change",
+    "issue/cta-button",
+    "issue/transaction-id",
+    "main",
+    "origin",
+    "refactor/landing-page_faq",
+    "refactor/testimonial"
+  ],
+  "parent": {
+    "copyright-change": "main",
+    "feature/dashboard/password-change": "main",
+    "issue/cta-button": "main",
+    "issue/transaction-id": "main",
+    "main": null,
+    "origin": "main",
+    "refactor/landing-page_faq": "main",
+    "refactor/testimonial": "main"
+  },
+  "order": [
+    "main",
+    "copyright-change",
+    "feature/dashboard/password-change",
+    "issue/cta-button",
+    "issue/transaction-id",
+    "origin",
+    "refactor/landing-page_faq",
+    "refactor/testimonial"
+  ]
+}

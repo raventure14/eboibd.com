@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "prisma generate && next build",
-    "start": "next start",
+    "dev": "node api.js && next dev",
+    "build": "node api.js && prisma generate && next build",
+    "start": "node api.js && next start",
     "lint": "next lint"
   },
   "dependencies": {
@@ -48,6 +48,7 @@
     "@types/node": "20.6.2",
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
+    "@vercel/analytics": "^1.4.1",
     "autoprefixer": "10.4.15",
     "axios": "^1.7.9",
     "bcryptjs": "^2.4.3",
