@@ -92,7 +92,7 @@ export default function Footer() {
         {/* Bottom Copyright */}
         <div className="mt-16 text-center text-para flex flex-col md:flex-row justify-center ">
           <p className="flex items-center  justify-center  gap-1">
-            © 2024 RA Venture. All rights reserved.
+            © {new Date().getFullYear()} RA Venture. All rights reserved.
           </p>
           <p className="text-center">
             {" "}
