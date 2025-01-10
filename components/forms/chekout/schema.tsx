@@ -17,7 +17,7 @@ export const checkoutFormSchema = z.object({
     "Invalid phone number. Must be in the format +8801XXXXXXXXX or 01XXXXXXXXX."
   ), // Optional with phone format validation
   transactionId: z.string({message:"transaction ID is required."}).regex(
-    /^BL[A-Z0-9]{8}$/, // Regex for "BL" followed by 8 alphanumeric characters
+    /^[A-Z0-9]{10}$/, // Regex for "BL" followed by 8 alphanumeric characters
     "Please enter valid transaction ID"),
   paymentMethod:z.string().min(4, {message:"Paymetn method is required"}),
   userAgreement:z.boolean({message:"User agreement is required"}).refine((value) =>{
